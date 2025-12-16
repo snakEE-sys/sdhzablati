@@ -22,7 +22,7 @@ import {useState} from "react";
 import Image from "next/image";
 import AuthError from "@/app/components/errors/authError";
 
-export function SignUp() {
+const SignUp = () => {
     const router = useRouter();
 
     const [error, setError] = useState<string>();
