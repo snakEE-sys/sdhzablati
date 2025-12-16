@@ -22,7 +22,7 @@ import { LastGalerie } from "@/components/LastGalerie";
 //const gallery = await getAllImages();
 //const rst = gallery?.map((gallery) => console.log(gallery));
 
-export const Dashboard = () => {
+const Dashboard = () => {
   return (
     <div className="flex min-h-[100dvh] bg-slate-50">
       <Sidebar />
