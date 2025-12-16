@@ -5,7 +5,19 @@ import { Card } from "@/components/ui/card";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { getCategoryColor } from "@/utils/category-color";
 
-export const FeaturedPost = ({ featuredPost }) => {
+type FeaturedPostProps = {
+  featuredPost?: {
+    id: string;
+    title: string;
+    category: string;
+    date: string;
+    author: string;
+    image?: string;
+    content: string;
+  };
+};
+
+export const FeaturedPost = ({ featuredPost }: FeaturedPostProps) => {
   return (
     <>
       {featuredPost && (

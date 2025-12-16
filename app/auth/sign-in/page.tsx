@@ -102,7 +102,7 @@ export default function SignIn() {
                 </FormItem>
               )}
             />
-            {error ? <AuthError message={error} /> : null}
+            {error ? <AuthError error={error} /> : null}
             <Button type="submit">Přihlásit se</Button>
             <div className="mt-4 text-center text-sm">
               Nemáš ještě účet?{" "}
