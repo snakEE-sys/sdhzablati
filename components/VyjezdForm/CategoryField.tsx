@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "@/db/queries";
 
-const CategoryField = ({ form }: { form: any }) => {
+const CategoryField = ({ form }) => {
   const categories = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,

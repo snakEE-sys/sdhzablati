@@ -4,11 +4,11 @@ import { Upload } from "lucide-react";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 
-export const ImageField = ({ form }: { form: any }) => {
+export const ImageField = ({ form }) => {
   return (
     <form.Field
       name="image"
-      children={(field: any) => (
+      children={(field) => (
         <>
           <Label htmlFor="post-image">Obrázek</Label>
           <div className="border-2 border-dashed rounded-lg p-6 text-center">

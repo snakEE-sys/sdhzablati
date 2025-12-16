@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { FileText, FolderOpen, ImageIcon, Truck } from "lucide-react";
-import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { useGetStatistics } from "@/app/hooks/useGetStatistics";
 
 export function Statistics() {

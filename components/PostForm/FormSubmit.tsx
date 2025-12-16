@@ -3,7 +3,7 @@
 import { Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 
-export const FormSubmit = ({ form }: { form: any }) => {
+export const FormSubmit = ({ form }) => {
   return (
     <form.Subscribe
       selector={(state) => [state.canSubmit, state.isSubmitting]}

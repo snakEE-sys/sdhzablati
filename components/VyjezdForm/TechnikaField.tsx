@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { getTechnika } from "@/db/queries";
 
-const TechnikaField = ({ form }: { form: any }) => {
+const TechnikaField = ({ form }) => {
   const techniky = useQuery({
     queryKey: ["technika"],
     queryFn: getTechnika,

@@ -3,7 +3,7 @@
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
-const DescriptionField = ({ form }: { form: any }) => (
+const DescriptionField = ({ form }) => (
   <div className="space-y-2">
     <form.Field
       name="description"

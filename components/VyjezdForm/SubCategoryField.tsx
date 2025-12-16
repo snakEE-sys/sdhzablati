@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { useQuery } from "@tanstack/react-query";
 import { getSubcategories } from "@/db/queries";
 
-const SubCategoryField = ({ form }: { form: any }) => {
+const SubCategoryField = ({ form }) => {
   const subCategories = useQuery({
     queryKey: ["subCategories"],
     queryFn: getSubcategories,

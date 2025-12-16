@@ -13,7 +13,7 @@ import { Tags } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getJednotky } from "@/db/queries";
 
-const JednotkyField = ({ form }: { form: any }) => {
+const JednotkyField = ({ form }) => {
   const jednotky = useQuery({
     queryKey: ["jednotky"],
     queryFn: getJednotky,

@@ -3,11 +3,11 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-export const TitleField = ({ form }: { form: any }) => {
+export const TitleField = ({ form }) => {
   return (
     <form.Field
       name="title"
-      children={(field: any) => (
+      children={(field) => (
         <>
           <Label htmlFor="title">Titulek</Label>
           <Input

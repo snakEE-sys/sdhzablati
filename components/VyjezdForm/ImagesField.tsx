@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Upload } from "lucide-react";
 import { useRef } from "react";
 
-function ImagesField({ form }: { form: any }) {
+function ImagesField({ form }) {
   const fileInput = useRef<HTMLInputElement>(null);
 
   return (
@@ -14,7 +14,7 @@ function ImagesField({ form }: { form: any }) {
       <form.Field
         name="images"
         mode="array"
-        children={(field: any) => (
+        children={(field) => (
           <>
             <Label>Fotogalerie</Label>
             <div className="border-2 border-dashed rounded-lg p-6 text-center">

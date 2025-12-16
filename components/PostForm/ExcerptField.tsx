@@ -3,11 +3,11 @@
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
-export const ExcerptField = ({ form }: { form: any }) => {
+export const ExcerptField = ({ form }) => {
   return (
     <form.Field
       name="excerpt"
-      children={(field: any) => (
+      children={(field) => (
         <>
           <Label htmlFor="name">Úryvek</Label>
           <Input

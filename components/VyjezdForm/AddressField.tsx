@@ -3,11 +3,11 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-const AddressField = ({ form }: { form: any }) => (
+const AddressField = ({ form }) => (
   <div className="space-y-2 col-span-2">
     <form.Field
       name="address"
-      children={(field: any) => (
+      children={(field) => (
         <>
           <Label htmlFor="address">Adresa</Label>
           <Input

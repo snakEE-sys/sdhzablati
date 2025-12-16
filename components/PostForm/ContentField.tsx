@@ -4,12 +4,12 @@ import { Label } from "@/components/ui/label";
 import { TiptapEditor } from "../richTextEditor/Tiptap";
 import { useState } from "react";
 
-export const ContentField = ({ form }: { form: any }) => {
+export const ContentField = ({ form }) => {
   const [content, setContent] = useState("Zde napiš obsah příspěvku..");
   return (
     <form.Field
       name="content"
-      children={(field: any) => (
+      children={(field) => (
         <>
           <Label htmlFor="content">Obsah</Label>
           <TiptapEditor

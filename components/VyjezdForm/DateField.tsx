@@ -11,7 +11,7 @@ import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { cs } from "date-fns/locale";
 
-const DateField = ({ form }: { form: any }) => (
+const DateField = ({ form }) => (
   <div className="space-y-2">
     <form.Field
       name="date"

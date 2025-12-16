@@ -3,7 +3,7 @@
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-const TimeField = ({ form }: { form: any }) => (
+const TimeField = ({ form }) => (
   <div className="space-y-2">
     <form.Field
       name="time"
