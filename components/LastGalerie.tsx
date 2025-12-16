@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, ChevronRight, Edit, Plus, Trash2 } from "lucide-react";
+import { Calendar, ChevronRight, Edit, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useGetGallery } from "@/app/hooks/useGetAllImages";

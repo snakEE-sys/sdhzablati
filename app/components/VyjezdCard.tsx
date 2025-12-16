@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Card, CardContent } from "@/components/ui/card"
 import { getVyjezd } from "@/utils/db";
 

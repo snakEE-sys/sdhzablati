@@ -5,7 +5,7 @@ export async function GET() {
     const { vyjezdy } = await getVyjezdy();
     return new Response(JSON.stringify(vyjezdy));
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to fetch vyjezdy" }), {
+    return new Response(JSON.stringify({ error: "Failed to fetch vyjezdy", errorMessage: (error as Error).message }), {
       status: 500,
     });
   }

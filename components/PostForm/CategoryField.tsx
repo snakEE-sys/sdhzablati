@@ -9,7 +9,7 @@ import {
 } from "../ui/select";
 import { getPostsCategories } from "@/db/queries";
 
-export const CategoryField = ({ form }: { form: any }) => {
+export const CategoryField = ({ form }: { form: unknown }) => {
   const { data: posts_categories } = useQuery({
     queryKey: ["posts_categories"],
     queryFn: getPostsCategories,
@@ -18,7 +18,7 @@ export const CategoryField = ({ form }: { form: any }) => {
   return (
     <form.Field
       name="category"
-      children={(field: any) => (
+      children={(field: unknown) => (
         <>
           <Label htmlFor="category">Kategorie</Label>
           <Select

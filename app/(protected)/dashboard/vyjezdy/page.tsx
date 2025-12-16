@@ -33,8 +33,8 @@ import { useTime } from "@/app/hooks/useTime";
 const DashboardVyjezdy = () => {
   const {
     data: vyjezdy,
-    error,
-    isPending,
+    /*error,*/
+    /*isPending,*/
   } = useSuspenseQuery({
     queryKey: ["vyjezdy"],
     queryFn: useGetVyjezdy,
@@ -123,7 +123,7 @@ const DashboardVyjezdy = () => {
                         <Edit className="h-4 w-4" />
                         <span className="hidden sm:inline">Upravit</span>
                       </Button>
-                      <DeleteDialog type={"vyjezdy"} itemIdSlug={vyjezd.id}>
+                      <DeleteDialog type={"vyjezdy"} itemIdSlug={vyjezd.id || ""}>
                         <Button
                           variant="outline"
                           size="sm"

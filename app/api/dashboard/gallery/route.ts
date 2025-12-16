@@ -5,7 +5,7 @@ export async function GET() {
     const gallery = await getAllImages();
     return new Response(JSON.stringify(gallery));
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to fetch images" }), {
+    return new Response(JSON.stringify({ error: "Failed to fetch images", errorMessage: (error as Error).message }), {
       status: 500,
     });
   }

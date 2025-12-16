@@ -40,7 +40,7 @@ export async function GET() {
     const { posts } = await getLastThreePosts();
     return new Response(JSON.stringify(posts));
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to fetch posts" }), {
+    return new Response(JSON.stringify({ error: "Failed to fetch posts", errorMessage: (error as Error).message }), {
       status: 500,
     });
   }
@@ -60,7 +60,7 @@ export async function DELETE(request: NextRequest) {
 
     return new Response(null, { status: 204 }); // 204 No Content
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to delete vyjezd" }), {
+    return new Response(JSON.stringify({ error: "Failed to delete vyjezd", errorMessage: (error as Error).message }), {
       status: 500,
     });
   }

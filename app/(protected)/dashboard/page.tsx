@@ -7,10 +7,10 @@ import { Suspense } from "react";
 import { DashboardSuspense } from "@/components/DashboardSuspense";
 
 import {
-  getAllImages,
-  getGalleryCount,
-  getImagesCount,
-  uploadImage,
+  /*getAllImages,*/
+  /*getGalleryCount,*/
+  /*getImagesCount,*/
+  /*uploadImage,*/
 } from "@/app/hooks/useCloudinary";
 import { LastGalerie } from "@/components/LastGalerie";
 

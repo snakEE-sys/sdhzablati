@@ -66,7 +66,7 @@ export async function DELETE(request: NextRequest) {
 
     return new Response(null, { status: 204 }); // 204 No Content
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to delete vyjezd" }), {
+    return new Response(JSON.stringify({ error: "Failed to delete vyjezd", errorMessage: (error as Error).message }), {
       status: 500,
     });
   }
@@ -78,7 +78,7 @@ export async function GET() {
     const { vyjezdy } = await getLastThreeVyjezdy();
     return new Response(JSON.stringify(vyjezdy));
   } catch (error) {
-    return new Response(JSON.stringify({ error: "Failed to fetch vyjezdy" }), {
+    return new Response(JSON.stringify({ error: "Failed to fetch vyjezdy", errorMessage: (error as Error).message }), {
       status: 500,
     });
   }

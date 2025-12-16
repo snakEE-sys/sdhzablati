@@ -1,4 +1,4 @@
-import { Field, useForm } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { FormSubmit } from "../PostForm/FormSubmit";
@@ -55,7 +55,7 @@ export const GalleryForm = ({ setOpenDialog }) => {
         <div className="space-y-2">
           <form.Field
             name="title"
-            children={(field: any) => (
+            children={(field: unknown) => (
               <>
                 <Label htmlFor="title">Název</Label>
                 <Input

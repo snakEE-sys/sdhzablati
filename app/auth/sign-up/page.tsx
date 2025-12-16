@@ -39,6 +39,7 @@ export function SignUp() {
         },
     })
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async function onSubmit(values: z.infer<typeof formSchema>) {
         await signUp.email({
             email: form.getValues("email"),

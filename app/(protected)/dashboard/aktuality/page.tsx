@@ -26,8 +26,8 @@ import { DashboardSuspense } from "@/components/DashboardSuspense";
 const Aktuality = () => {
   const {
     data: posts,
-    isPending,
-    error,
+    /*isPending,*/
+    /*error,*/
   } = useSuspenseQuery({
     queryKey: ["posts"],
     queryFn: useGetPosts,
@@ -93,7 +93,7 @@ const Aktuality = () => {
                           </Badge>
                           <div className="flex items-center text-sm text-slate-500">
                             <Calendar className="h-4 w-4 mr-1" />
-                            {useDate(post.date)}
+                            {useDate(post.date || "")}
                           </div>
                         </div>
                         <h3 className="text-lg font-bold mb-2">{post.title}</h3>
@@ -107,7 +107,7 @@ const Aktuality = () => {
                           <Edit className="h-4 w-4" />
                           <span className="hidden sm:inline">Upravit</span>
                         </Button>
-                        <DeleteDialog type={"posts"} itemIdSlug={post.id}>
+                        <DeleteDialog type={"posts"} itemIdSlug={post.id || ""}>
                           <Button
                             variant="outline"
                             size="sm"
