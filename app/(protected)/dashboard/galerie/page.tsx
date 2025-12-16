@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Sidebar } from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -59,7 +60,7 @@ const Galerie = () => {
             </Card>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {gallery.map((gallery) => (
+              {/*gallery.map((gallery) => (
                 <Card key={gallery.id} className="overflow-hidden">
                   <div className="aspect-video relative">
                     <Image
@@ -99,7 +100,7 @@ const Galerie = () => {
                     </div>
                   </CardContent>
                 </Card>
-              ))}
+              ))*/}
             </div>
 
             <div className="mt-6 flex justify-center">
