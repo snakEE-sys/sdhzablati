@@ -458,7 +458,7 @@ export async function getPosts() {
         author: post.author,
         featured: post.featured,
         excerpt: post.excerpt,
-        category: post.category?.name || null,
+        category: post.category?.name,
       })),
     };
   } catch (error) {

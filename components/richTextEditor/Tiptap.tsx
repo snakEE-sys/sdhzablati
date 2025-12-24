@@ -4,13 +4,11 @@ import { useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
-import Strike from "@tiptap/extension-strike";
 import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Color from "@tiptap/extension-color";
-import TextStyle from "@tiptap/extension-text-style";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
@@ -54,6 +52,7 @@ export function TiptapEditor({ content = "", onChange }: TiptapEditorProps) {
   const [isLinkPopoverOpen, setIsLinkPopoverOpen] = useState(false);
 
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         bulletList: {
@@ -67,11 +66,9 @@ export function TiptapEditor({ content = "", onChange }: TiptapEditorProps) {
         strike: false, // We'll use the dedicated Strike extension
       }),
       Underline,
-      Strike,
       Highlight.configure({
         multicolor: true,
       }),
-      TextStyle,
       Color,
       TextAlign.configure({
         types: ["heading", "paragraph"],

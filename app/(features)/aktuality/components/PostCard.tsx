@@ -1,15 +1,16 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, ChevronRight, User } from "lucide-react";
-import Link from "next/link";
 import { getCategoryColor } from "@/utils/category-color";
+import { Post } from "../types";
 
-export function Post({ post }) {
+export function PostCard({ post }: { post: Post }) {
   return (
     <>
       <Card
-        key={post.id}
+        key={post.slug}
         className="overflow-hidden rounded-2xl border-none shadow-lg hover:shadow-xl transition-shadow"
       >
         <div className="relative h-48">
@@ -40,7 +41,7 @@ export function Post({ post }) {
         </CardContent>
         <CardFooter className="px-6 pb-6 pt-0">
           <Link
-            href={`/blog/${post.id}`}
+            href={`/blog/${post.slug}`}
             className="text-red-600 hover:text-red-700 font-medium inline-flex items-center"
           >
             Číst více <ChevronRight className="ml-1 h-4 w-4" />

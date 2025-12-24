@@ -1,4 +1,4 @@
-import { Post } from "@/app/components/blog/Post";
+import { Post } from "@/app/(pages)/blog/components/Post";
 import { Button } from "@/components/ui/button";
 import { getPosts } from "@/db/queries";
 

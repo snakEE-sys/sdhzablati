@@ -1,9 +1,7 @@
-import Posts from "@/app/components/blog/Posts";
-import { getPosts } from "@/db/queries";
-export const dynamic = "force-dynamic";
+import PostList from "@/app/(features)/aktuality/components/PostList";
 
-async function BlogPage() {
-  const { posts } = await getPosts();
+export async function AktualityPage() {
+  const { allPosts } = await getAllPosts();
 
   return (
     <div>
@@ -18,9 +16,7 @@ async function BlogPage() {
           </p>
         </div>
       </section>
-      {/* Posts */}
-      <Posts posts={posts} />
+      <PostList posts={allPosts} />
     </div>
   );
 }
-export default BlogPage;

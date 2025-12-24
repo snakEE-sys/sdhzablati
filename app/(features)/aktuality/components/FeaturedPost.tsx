@@ -1,23 +1,16 @@
-import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import { getCategoryColor } from "@/utils/category-color";
+import { Post } from "../types";
 
-type FeaturedPostProps = {
-  featuredPost?: {
-    id: string;
-    title: string;
-    category: string;
-    date: string;
-    author: string;
-    image?: string;
-    content: string;
-  };
-};
+export function FeaturedPost({ posts }: { posts: Post[] }) {
+  if (!posts) return null;
+  const featuredPost = posts.find((p) => p.featured === true);
+  if (!featuredPost) return null;
 
-export const FeaturedPost = ({ featuredPost }: FeaturedPostProps) => {
   return (
     <>
       {featuredPost && (
@@ -62,7 +55,7 @@ export const FeaturedPost = ({ featuredPost }: FeaturedPostProps) => {
                   {featuredPost.content}
                 </p>
                 <Link
-                  href={`/blog/${featuredPost.id}`}
+                  href={`/blog/${featuredPost.slug}`}
                   className="inline-flex items-center text-red-600 hover:text-red-700 font-medium mt-auto"
                 >
                   Přečíst celý článek <ArrowRight className="ml-2 h-4 w-4" />
@@ -74,4 +67,4 @@ export const FeaturedPost = ({ featuredPost }: FeaturedPostProps) => {
       )}
     </>
   );
-};
+}
