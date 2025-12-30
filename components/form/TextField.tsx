@@ -11,12 +11,14 @@ type TextFieldProps = {
 export function TextField({ label, desc }: TextFieldProps) {
   const field = useFieldContext<string>();
 
+  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
   return (
-    <Field>
+    <Field data-invalid={isInvalid}>
       <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
       <Input
         id={field.name}
-        aria-invalid={!field.state.meta.isValid}
+        aria-invalid={isInvalid}
         type="text"
         value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
