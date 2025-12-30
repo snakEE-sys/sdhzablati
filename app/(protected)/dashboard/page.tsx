@@ -1,4 +1,4 @@
-
+"use client";
 import { Sidebar } from "@/components/Sidebar";
 import { Statistics } from "@/components/Statistics";
 import { LastVyjezdy } from "@/components/LastVyjezdy";
@@ -6,13 +6,6 @@ import { Toaster } from "sonner";
 import { LastAktuality } from "@/components/LastAktuality";
 import { Suspense } from "react";
 import { DashboardSuspense } from "@/components/DashboardSuspense";
-
-import {
-  /*getAllImages,*/
-  /*getGalleryCount,*/
-  /*getImagesCount,*/
-  /*uploadImage,*/
-} from "@/app/hooks/useCloudinary";
 import { LastGalerie } from "@/components/LastGalerie";
 
 /*const aplaudImage = uploadImage(

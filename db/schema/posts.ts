@@ -11,6 +11,7 @@ import {
 
 export const posts = pgTable("posts", {
   id: serial("id").primaryKey(),
+  slug: varchar("slug", { length: 255 }).notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -21,6 +22,7 @@ export const posts = pgTable("posts", {
       onDelete: "cascade",
     }),
   featured: boolean("featured").notNull().default(false),
+  published: boolean("published").default(false).notNull(),
   excerpt: text("excerpt").notNull(),
   image: varchar("image", { length: 255 }),
   author: varchar("author", { length: 255 }).notNull(),

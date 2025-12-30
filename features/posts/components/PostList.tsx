@@ -3,20 +3,30 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FeaturedPost } from "./FeaturedPost";
-import { Post } from "../types";
+import { Category, Post } from "../types";
 import { PostCard } from "./PostCard";
 import { PostCategoryFilter } from "./PostCategoryFilter";
 import { PostSearch } from "./PostSearch";
 
-export default function PostList({ posts }: { posts: Post[] }) {
+export default function PostList({
+  posts,
+  categories,
+}: {
+  posts: Post[];
+  categories: Category[];
+}) {
   const [category, setCategory] = useState<string>("Všechny");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const filteredPosts = category
-    ? posts.filter(
-        (p) => p.category === category || searchTerm === p.title.toLowerCase()
-      )
-    : null;
+  const filteredPosts = posts.filter((p) => {
+    const matchesCategory =
+      !category || category === "Všechny" || p.category === category;
+
+    const matchesSearch =
+      !searchTerm || p.title.toLowerCase().includes(searchTerm.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <>
@@ -27,7 +37,11 @@ export default function PostList({ posts }: { posts: Post[] }) {
               <PostSearch onSearchTermChange={setSearchTerm} />
             </div>
             <div className="w-full md:w-2/3 flex flex-wrap gap-2 justify-center md:justify-end">
-              <PostCategoryFilter onCategoryChange={setCategory} />
+              <PostCategoryFilter
+                categories={categories}
+                value={category}
+                onChange={setCategory}
+              />
             </div>
           </div>
         </div>
@@ -37,7 +51,7 @@ export default function PostList({ posts }: { posts: Post[] }) {
         <div className="container mx-auto">
           <FeaturedPost posts={posts} />
           <h2 className="text-2xl font-bold mb-6">Všechny aktuality</h2>
-          {filteredPosts && filteredPosts.length > 1 ? (
+          {filteredPosts && filteredPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((p: Post) => (
                 <PostCard key={p.slug} post={p} />

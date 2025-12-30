@@ -6,7 +6,7 @@ export function RelatedPosts({
   currentSlug,
   currentCategory,
 }: RelatedPostsProps) {
-  if (!posts.length) return null;
+  if (!posts) return null;
   const relatedPosts = posts.filter(
     (p) => p.slug !== currentSlug && p.category === currentCategory
   );

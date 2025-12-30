@@ -465,7 +465,34 @@ export async function getPosts() {
     throw new Error(error as string);
   }
 }
-
+// --- Get Post By Slug ---
+export async function getPostBySlug(slug: string) {
+  try {
+    const post = await db.query.posts.findFirst({
+      where: eq(posts.slug, slug),
+      columns: {
+        id: true,
+        slug: true,
+        title: true,
+        content: true,
+        createdAt: true,
+        author: true,
+        featured: true,
+        excerpt: true,
+      },
+      with: {
+        category: {
+          columns: {
+            name: true,
+          },
+        },
+      },
+    });
+    return post;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+}
 // --- Get Posts Categories ---
 export async function getPostsCategories() {
   try {

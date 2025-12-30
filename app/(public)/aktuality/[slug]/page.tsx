@@ -1,20 +1,27 @@
 import Link from "next/link";
-import { PostSocialShare } from "@/app/(features)/aktuality/components/PostSocialShare";
-import { PostSidebar } from "@/app/(features)/aktuality/components/PostSidebar";
+import { notFound } from "next/navigation";
+import { getAllPosts, getPostBySlug } from "@/features/posts/lib/queries";
 import {
   PostArticle,
   PostHero,
   PostMeta,
-} from "@/app/(features)/aktuality/components/PostDetails";
-import { RelatedPosts } from "@/app/(features)/aktuality/components/RelatedPosts";
+} from "@/features/posts/components/PostDetails";
+import { PostSocialShare } from "@/features/posts/components/PostSocialShare";
+import { RelatedPosts } from "@/features/posts/components/RelatedPosts";
+import { PostSidebar } from "@/features/posts/components/PostSidebar";
 import { ArrowLeft } from "lucide-react";
 
-export async function Page({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
-  const { post, allPosts } = await Promise.all([
+  const [post, allPosts] = await Promise.all([
     getPostBySlug(slug),
     getAllPosts(),
   ]);
+  if (!post) return notFound();
   //get allPosts and getPostBySlug
   return (
     <div className="flex flex-col min-h-[100dvh]">

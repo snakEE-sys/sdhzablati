@@ -1,7 +1,14 @@
-import PostList from "@/app/(features)/aktuality/components/PostList";
+import PostList from "@/features/posts/components/PostList";
+import {
+  getAllPosts,
+  getCategories,
+} from "../../../features/posts/lib/queries";
 
-export async function AktualityPage() {
-  const { allPosts } = await getAllPosts();
+export default async function AktualityPage() {
+  const [posts, categories] = await Promise.all([
+    getAllPosts(),
+    getCategories(),
+  ]);
 
   return (
     <div>
@@ -16,7 +23,7 @@ export async function AktualityPage() {
           </p>
         </div>
       </section>
-      <PostList posts={allPosts} />
+      <PostList posts={posts} categories={categories} />
     </div>
   );
 }
