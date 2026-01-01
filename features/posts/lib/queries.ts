@@ -32,7 +32,7 @@ export async function getAllPosts(options?: {
     })
   );
 
-  if (error) return error.message;
+  if (error) throw error;
 
   return posts.map((post) => ({
     id: post.id,
@@ -54,7 +54,7 @@ export async function getAllPosts(options?: {
 export async function getPostBySlug(slug: string) {
   try {
     const post = await db.query.posts.findFirst({
-      where: eq(posts.slug, slug),
+      where: eq(postsTable.slug, slug),
       columns: {
         id: true,
         slug: true,
@@ -63,6 +63,7 @@ export async function getPostBySlug(slug: string) {
         createdAt: true,
         author: true,
         featured: true,
+        published: true,
         excerpt: true,
       },
       with: {
