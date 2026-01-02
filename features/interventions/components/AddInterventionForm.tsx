@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppForm } from "@/components/form";
-import { Intervention } from "../types";
+import { DeploymentItem, Intervention } from "../types";
 
 export function AddInterventionForm() {
   const defaultValues: Omit<Intervention, "id"> = {
@@ -11,8 +11,7 @@ export function AddInterventionForm() {
     time: "",
     address: "",
     description: "",
-    technique: [],
-    units: [],
+    deployment: [] as DeploymentItem[],
     images: [],
   };
 
@@ -41,6 +40,10 @@ export function AddInterventionForm() {
             desc="Zadejte popis události"
           />
         )}
+      />
+      <form.AppField
+        name="deployment"
+        children={(field) => <field.DeploymentField units={units} />}
       />
     </form>
   );
