@@ -2,12 +2,13 @@
 
 import { useAppForm } from "@/components/form";
 import { DeploymentItem, Intervention } from "../types";
+import { InterventionSchema } from "../schema";
 
 export function AddInterventionForm() {
   const defaultValues: Omit<Intervention, "id"> = {
     category: "",
     subCategory: "",
-    date: "",
+    date: new Date(),
     time: "",
     address: "",
     description: "",
@@ -19,7 +20,7 @@ export function AddInterventionForm() {
     formId: "interventionForm",
     defaultValues: defaultValues,
     validators: {
-      onSubmit: interventionSchema,
+      onSubmit: InterventionSchema,
     },
     onSubmit: ({ value }) => console.log(value),
   });
@@ -32,6 +33,21 @@ export function AddInterventionForm() {
         form.handleSubmit();
       }}
     >
+      <form.AppField
+        name="date"
+        children={(field) => (
+          <field.DateField
+            label="Datum události"
+            desc="Zadejte datum události"
+          />
+        )}
+      />
+      <form.AppField
+        name="time"
+        children={(field) => (
+          <field.TimeField label="Čas události" desc="Zadejte čas události" />
+        )}
+      />
       <form.AppField
         name="description"
         children={(field) => (
