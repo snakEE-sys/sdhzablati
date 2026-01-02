@@ -3,7 +3,7 @@ export type InterventionImage = {
 };
 export type Intervention = {
   id: string;
-  date: string;
+  date: Date;
   time: string;
   description: string;
   address: string;
