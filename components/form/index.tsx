@@ -5,6 +5,7 @@ import { SwitchField } from "./SwitchField";
 import { DeploymentField } from "@/features/interventions/components/DeploymentField";
 import { DateField } from "./DateField";
 import { TimeField } from "./TimeField";
+import { SelectField } from "./SelectField";
 
 export const { fieldContext, useFieldContext, formContext, useFormContext } =
   createFormHookContexts();
@@ -13,6 +14,7 @@ export const { useAppForm } = createFormHook({
   fieldComponents: {
     TextField,
     TextareaField,
+    SelectField,
     SwitchField,
     DeploymentField,
     DateField,
