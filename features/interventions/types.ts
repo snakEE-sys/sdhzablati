@@ -1,6 +1,7 @@
 export type InterventionImage = {
   publicId: string;
 };
+
 export type Intervention = {
   id: string;
   date: Date;
@@ -24,11 +25,33 @@ export type DeploymentItem = {
 export type Unit = {
   id: string;
   name: string;
-  vehicles: { id: string; name: string }[];
+};
+
+export type Vehicle = {
+  id: string;
+  name: string;
+};
+
+export type Category = {
+  id: string;
+  name: string;
+};
+
+export type SubCategory = {
+  id: string;
+  name: string;
 };
 
 export type DeploymentPickerProps = {
   units: Unit[];
+  vehicles: Vehicle[];
   onAdd: (item: DeploymentItem) => void;
   existingItems: DeploymentItem[];
+};
+
+export type AddInterventionFormProps = {
+  categories: Category[];
+  subcategories: SubCategory[];
+  units: Unit[];
+  vehicles: Vehicle[];
 };
