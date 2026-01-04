@@ -3,15 +3,22 @@ import { X } from "lucide-react";
 import { useFieldContext } from "@/components/form";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { DeploymentPicker } from "./DeploymentPicker";
-import { DeploymentItem, Unit } from "../types";
+import { DeploymentItem, Unit, Vehicle } from "../types";
 
-export function DeploymentField({ units }: { units: Unit[] }) {
+export function DeploymentField({
+  units,
+  vehicles,
+}: {
+  units: Unit[];
+  vehicles: Vehicle[];
+}) {
   const field = useFieldContext<DeploymentItem[]>();
 
   return (
     <div className="space-y-6">
       <DeploymentPicker
         units={units}
+        vehicles={vehicles}
         onAdd={(newItem) => field.pushValue(newItem)}
         existingItems={field.state.value}
       />

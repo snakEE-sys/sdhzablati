@@ -13,6 +13,7 @@ import { DeploymentPickerProps } from "../types";
 
 export function DeploymentPicker({
   units,
+  vehicles,
   onAdd,
   existingItems,
 }: DeploymentPickerProps) {
@@ -20,7 +21,6 @@ export function DeploymentPicker({
   const [vehicleId, setVehicleId] = useState("");
   const [qty, setQty] = useState(1);
 
-  // Check if this combo is already in the list
   const isDuplicate = existingItems.some(
     (item) => item.unitId === unitId && item.vehicleId === vehicleId
   );
@@ -29,7 +29,7 @@ export function DeploymentPicker({
 
   const handleAdd = () => {
     if (!selectedUnit) return;
-    const vehicle = selectedUnit.vehicles.find((v) => v.id === vehicleId);
+    const vehicle = vehicles.find((v) => v.id === vehicleId);
     if (!vehicle) return;
 
     onAdd({
@@ -80,7 +80,7 @@ export function DeploymentPicker({
               <SelectValue placeholder="Select Vehicle" />
             </SelectTrigger>
             <SelectContent>
-              {selectedUnit?.vehicles.map((v) => (
+              {vehicles.map((v) => (
                 <SelectItem
                   key={v.id}
                   value={v.id}
