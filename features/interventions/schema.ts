@@ -2,7 +2,7 @@ import { z } from "zod/v4";
 
 export const InterventionSchema = z.object({
   category: z.string().min(1, "Kategorie je povinná"),
-  subcategory: z.string().min(1, "Podkategorie je povinná"),
+  subCategory: z.string().min(1, "Podkategorie je povinná"),
   date: z.date({
     error: "Datum je povinné",
   }),
