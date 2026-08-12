@@ -131,7 +131,7 @@ export function DeploymentPicker({
       </div>
       {isDuplicate && (
         <p className="text-[10px] text-destructive text-right">
-          Already added to this unit
+          Již přidáno
         </p>
       )}
     </div>
