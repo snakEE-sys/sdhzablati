@@ -22,7 +22,7 @@ export function DeploymentPicker({
   const [qty, setQty] = useState(1);
 
   const isDuplicate = existingItems.some(
-    (item) => item.unitId === unitId && item.vehicleId === vehicleId
+    (item) => item.unitId === unitId && item.vehicleId === vehicleId,
   );
 
   const selectedUnit = units.find((u) => u.id === unitId);
@@ -86,7 +86,7 @@ export function DeploymentPicker({
                   key={v.id}
                   value={v.id}
                   disabled={existingItems.some(
-                    (i) => i.unitId === unitId && i.vehicleId === v.id
+                    (i) => i.unitId === unitId && i.vehicleId === v.id,
                   )}
                 >
                   {v.name}
