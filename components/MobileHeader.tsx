@@ -4,7 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
 import { User } from "better-auth/types";
 
-export const MobileHeader = ({ user }: { user: User }) => {
+export const MobileHeader = () => {
   return (
     <header className="md:hidden flex items-center justify-between px-6 py-4 bg-white border-b sticky top-0 z-20">
       <span className="font-bold text-red-600">SDH Záblatí</span>
@@ -16,7 +16,7 @@ export const MobileHeader = ({ user }: { user: User }) => {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0 w-64">
-          <Sidebar className="h-full" user={user} />
+          <Sidebar className="h-full" />
         </SheetContent>
       </Sheet>
     </header>

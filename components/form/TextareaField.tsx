@@ -23,7 +23,9 @@ export function TextareaField({ label, desc }: TextareaFieldProps) {
         onChange={(e) => field.handleChange(e.target.value)}
         onBlur={field.handleBlur}
       />
-      <FieldDescription>{desc}</FieldDescription>
+      <FieldDescription className="text-xs text-slate-500">
+        {desc}
+      </FieldDescription>
       <FieldErrors meta={field.state.meta} />
     </Field>
   );

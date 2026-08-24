@@ -6,9 +6,10 @@ import { FieldErrors } from "./FieldErrors";
 type TextFieldProps = {
   label: string;
   desc: string;
+  type: string;
 };
 
-export function TextField({ label, desc }: TextFieldProps) {
+export function TextField({ label, desc, type }: TextFieldProps) {
   const field = useFieldContext<string>();
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
@@ -19,12 +20,14 @@ export function TextField({ label, desc }: TextFieldProps) {
       <Input
         id={field.name}
         aria-invalid={isInvalid}
-        type="text"
+        type={type}
         value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
         onBlur={field.handleBlur}
       />
-      <FieldDescription>{desc}</FieldDescription>
+      <FieldDescription className="text-xs text-slate-500">
+        {desc}
+      </FieldDescription>
       <FieldErrors meta={field.state.meta} />
     </Field>
   );

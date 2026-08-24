@@ -1,5 +1,5 @@
 import { db } from "@/db/db";
-import { posts as postsTable } from "@/db/schema/posts";
+import { posts as postsTable } from "@/db/schema";
 import { tryCatch } from "@/lib/utils/try-catch";
 import { desc, eq } from "drizzle-orm";
 import { cacheTag } from "next/cache";
@@ -20,8 +20,8 @@ export async function getAllPosts(options?: {
     }),
   );
 
-  if (!posts) return null;
   if (error) throw error;
+  if (!posts) return null;
 
   return posts.map((post) => ({
     id: post.id,

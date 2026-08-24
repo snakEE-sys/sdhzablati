@@ -6,7 +6,7 @@ export const InterventionSchema = z.object({
   date: z.date({
     error: "Datum je povinné",
   }),
-  time: z.iso.time({
+  time: z.string({
     error: "Čas je povinný",
   }),
   address: z.string().min(5, "Adresa je povinná"),
@@ -19,8 +19,10 @@ export const InterventionSchema = z.object({
         vehicleId: z.uuid("Neplatné ID vozidla"),
         vehicleName: z.string(),
         quantity: z.int().min(1),
-      })
+      }),
     )
     .min(1, "Musíte přidat alespoň jednu techniku"),
-  images: z.array(z.string().optional()),
+  images: z.array(z.instanceof(File)).catch([]).optional(),
 });
+
+export type InterventionValues = z.infer<typeof InterventionSchema>;

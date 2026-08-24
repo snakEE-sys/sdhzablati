@@ -1,159 +1,189 @@
-import { MapPin, Phone, Mail, AlertTriangle, Building2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import { ReactNode } from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  ArrowUpRight,
+  Building2,
+  Mail,
+  MapPin,
+  Phone,
+  Receipt,
+} from "lucide-react";
+import { orgContact } from "@/lib/org-contact";
+
+export const metadata: Metadata = {
+  title: "Kontakt | SDH Bohumín – Záblatí",
+  description:
+    "Telefon, e-mail, adresa zbrojnice, IČO a mapa hasičského sboru Bohumín – Záblatí.",
+};
 
 export default function ContactPage() {
   return (
-    <main className="flex-1">
-      <HeroSection />
-      <MainContent>
-        <EmergencyContact />
-        <ContactInformation />
-      </MainContent>
-    </main>
-  );
-}
-
-const HeroSection = () => {
-  return (
-    <section className="relative py-16 bg-gradient-to-r from-red-600 to-orange-500 text-white">
-      <div className="container mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Kontaktujte nás</h1>
-        <p className="text-lg max-w-3xl text-white/90">
-          Máte dotaz nebo potřebujete pomoc? Neváhejte nás kontaktovat. Jsme tu
-          pro vás.
-        </p>
-      </div>
-    </section>
-  );
-};
-
-const EmergencyContact = () => {
-  return (
-    <div className="mb-16">
-      <div className="bg-red-50 rounded-3xl p-8 md:p-12 border-2 border-red-200">
-        <div className="flex flex-col md:flex-row gap-8 items-center">
-          <div className="md:w-1/6 flex justify-center">
-            <div className="bg-red-100 p-6 rounded-full">
-              <AlertTriangle className="h-12 w-12 text-red-600" />
-            </div>
-          </div>
-          <div className="md:w-5/6">
-            <h2 className="text-2xl font-bold mb-4">Tísňové volání</h2>
-            <p className="text-slate-700 mb-6">
-              V případě požáru, nehody nebo jiné mimořádné události volejte
-              tísňovou linku hasičů.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6">
-              <Button className="rounded-full bg-red-600 hover:bg-red-700 text-white text-xl py-8 !px-6">
-                <Phone className="mr-2 h-6 w-6" /> 150
-              </Button>
-              <Button
-                variant="outline"
-                className="rounded-full border-red-600 text-red-600 hover:bg-red-100 text-xl py-8 !px-6"
-              >
-                <Phone className="mr-2 h-6 w-6" /> 112
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-const MainContent = ({ children }: { children: ReactNode }) => {
-  return (
-    <section className="py-16">
-      <div className="container mx-auto">{children}</div>
-    </section>
-  );
-};
-const ContactInformation = () => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-      <Card className="border-none shadow-lg rounded-2xl">
-        <CardContent className="p-6">
-          <h3 className="font-bold text-lg mb-4">Adresa</h3>
-          <div className="flex items-start gap-4 mb-4">
-            <div className="bg-red-100 p-3 rounded-full">
-              <MapPin className="h-5 w-5 text-red-600" />
-            </div>
-            <div>
-              <p className="text-slate-700">
-                Sbor dobrovolných hasičů Bohumín - Záblatí
-                <br />
-                Sokolská 208
-                <br />
-                735 52 Bohumín
+    <div className="flex flex-col min-h-dvh">
+      <main className="flex-1 pt-24 md:pt-28 lg:pt-32">
+        {/* Intro — stejný rytmus jako úvod na /aktuality */}
+        <section className="overflow-hidden py-12 md:py-18 lg:py-24 bg-white rounded-3xl m-2 md:m-4 relative">
+          <div
+            className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-custom-red/8 blur-3xl"
+            aria-hidden
+          />
+          <div className="container relative mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-custom-red text-lg md:text-xl font-normal mb-2 md:mb-4">
+                Kontakt
+              </p>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 md:mb-6 text-balance">
+                Jsme tu pro vás
+              </h1>
+              <p className="text-custom-light-grey font-light text-base md:text-lg leading-relaxed max-w-prose mx-auto">
+                Dotazy k členství, akcím, výcviku nebo spolupráci nám napište
+                nebo zavolejte. Zbrojnici najdete přímo v Bohumíně – Záblatí.
               </p>
             </div>
           </div>
-          <div className="aspect-video w-full rounded-xl overflow-hidden">
-            <Image
-              src="/images/mapa.png"
-              alt="Mapa s umístěním hasičské zbrojnice"
-              width={500}
-              height={300}
-              className="w-full h-full object-cover"
-            />
+        </section>
+
+        {/* Obsah — pink panel + karty jako na landing */}
+        <section className="relative overflow-hidden py-12 md:py-18 lg:py-24 bg-custom-pink rounded-3xl m-2 md:m-4 mt-3 md:mt-4">
+          <div className="container relative mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+              <div className="lg:col-span-5 space-y-5">
+                <h2 className="text-2xl md:text-3xl font-medium text-custom-dark-red">
+                  Rychlé spojení
+                </h2>
+                <p className="text-custom-light-grey font-light text-base leading-relaxed">
+                  Nejjednodušší je e-mail nebo telefon — odpovídáme, jen jak to
+                  jde.
+                </p>
+
+                <div className="grid gap-4">
+                  <a
+                    href={`tel:${orgContact.phone}`}
+                    className="group flex gap-4 rounded-2xl border border-black/8 bg-white/90 p-5 shadow-sm transition hover:border-custom-red/25 hover:shadow-md"
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-custom-red/10 text-custom-dark-red">
+                      <Phone className="h-5 w-5" aria-hidden />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs font-medium uppercase tracking-wide text-custom-light-grey">
+                        Telefon
+                      </span>
+                      <span className="text-lg font-medium text-custom-medium-grey group-hover:text-custom-red transition-colors">
+                        {orgContact.phoneDisplay}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="ml-auto h-5 w-5 shrink-0 text-custom-red opacity-0 transition group-hover:opacity-100" />
+                  </a>
+
+                  <a
+                    href={`mailto:${orgContact.email}`}
+                    className="group flex gap-4 rounded-2xl border border-black/8 bg-white/90 p-5 shadow-sm transition hover:border-custom-red/25 hover:shadow-md"
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-custom-dark-red/10 text-custom-dark-red">
+                      <Mail className="h-5 w-5" aria-hidden />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs font-medium uppercase tracking-wide text-custom-light-grey">
+                        E-mail
+                      </span>
+                      <span className="text-lg font-medium text-custom-medium-grey break-all group-hover:text-custom-red transition-colors">
+                        {orgContact.email}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="ml-auto h-5 w-5 shrink-0 text-custom-red opacity-0 transition group-hover:opacity-100" />
+                  </a>
+
+                  <div className="flex gap-4 rounded-2xl border border-black/8 bg-white/90 p-5 shadow-sm">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-custom-dark-red/10 text-custom-dark-red">
+                      <MapPin className="h-5 w-5" aria-hidden />
+                    </span>
+                    <div>
+                      <span className="block text-xs font-medium uppercase tracking-wide text-custom-light-grey mb-1">
+                        Adresa
+                      </span>
+                      <address className="not-italic text-base font-medium text-custom-medium-grey leading-relaxed">
+                        {orgContact.addressLines.map((line) => (
+                          <span key={line} className="block">
+                            {line}
+                          </span>
+                        ))}
+                      </address>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex gap-3 rounded-2xl border border-black/8 bg-white/90 p-5 shadow-sm">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-custom-pink text-custom-dark-red ring-1 ring-black/6">
+                        <Building2 className="h-5 w-5" aria-hidden />
+                      </span>
+                      <div>
+                        <span className="block text-xs font-medium uppercase tracking-wide text-custom-light-grey">
+                          IČO
+                        </span>
+                        <span className="text-lg font-semibold text-custom-medium-grey tabular-nums">
+                          {orgContact.ico}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 rounded-2xl border border-black/8 bg-white/90 p-5 shadow-sm">
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-custom-pink text-custom-dark-red ring-1 ring-black/6">
+                        <Receipt className="h-5 w-5" aria-hidden />
+                      </span>
+                      <div>
+                        <span className="block text-xs font-medium uppercase tracking-wide text-custom-light-grey">
+                          DPH
+                        </span>
+                        <span className="text-sm font-medium text-custom-medium-grey leading-snug">
+                          {orgContact.vatNote}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                  <h2 className="text-2xl md:text-3xl font-medium text-black">
+                    Kde nás najdete
+                  </h2>
+                  <Link
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      "Sokolská 208, 735 52 Bohumín-Záblatí",
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-custom-red hover:text-custom-dark-red transition inline-flex items-center gap-1"
+                  >
+                    Otevřít v Mapách
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </div>
+                <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-md ring-1 ring-black/5">
+                  <div className="aspect-4/3 min-h-[280px] w-full md:aspect-16/10 md:min-h-[360px]">
+                    <iframe
+                      title="Mapa — hasičská zbrojnice Sokolská 208, Bohumín – Záblatí"
+                      src={orgContact.mapEmbedSrc}
+                      className="absolute inset-0 h-full w-full border-0 grayscale-15 contrast-[1.02]"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/55 to-transparent px-4 py-4 pointer-events-none">
+                    <p className="text-white text-sm font-medium drop-shadow-sm">
+                      Hasičská zbrojnice · {orgContact.addressLines[1]}
+                    </p>
+                  </div>
+                </div>
+                <p className="text-custom-light-grey text-sm font-light leading-relaxed">
+                  Parkování v okolí zbrojnice — při akcích prosím respektujte
+                  vyznačené průjezdy pro jednotku.
+                </p>
+              </div>
+            </div>
           </div>
-        </CardContent>
-      </Card>
-      <Card className="border-none shadow-lg rounded-2xl">
-        <CardContent className="p-6">
-          <h3 className="font-bold text-lg mb-4">Kontakty</h3>
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="bg-red-100 p-3 rounded-full">
-                <Phone className="h-5 w-5 text-red-600" />
-              </div>
-              <div>
-                <p className="font-medium">Telefon</p>
-                <p className="text-slate-700">+420 731 130 689</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="bg-red-100 p-3 rounded-full">
-                <Mail className="h-5 w-5 text-red-600" />
-              </div>
-              <div>
-                <p className="font-medium">E-mail</p>
-                <p className="text-slate-700">info@sdhzablati.cz</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="bg-red-100 p-3 rounded-full">
-                <Building2 className="h-5 w-5 text-red-600" />
-              </div>
-              <div>
-                <p className="font-medium">IČO</p>
-                <p className="text-slate-700">64630722</p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-      <Card className="border-none shadow-lg rounded-2xl">
-        <CardContent className="p-6">
-          <h3 className="font-bold text-lg mb-4">Vedení sboru</h3>
-          <div className="space-y-6">
-            <div>
-              <p className="font-medium">Starosta sboru</p>
-              <p className="text-slate-700">Jan Plasgura</p>
-              <p className="text-slate-700">info@sdhzablati.cz</p>
-              <p className="text-slate-700">+420 731 130 689</p>
-            </div>
-            <div>
-              <p className="font-medium">Velitel jednotky</p>
-              <p className="text-slate-700">Jan Plasgura</p>
-              <p className="text-slate-700">info@sdhzablati.cz</p>
-              <p className="text-slate-700">+420 731 130 689</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+        </section>
+      </main>
     </div>
   );
-};
+}

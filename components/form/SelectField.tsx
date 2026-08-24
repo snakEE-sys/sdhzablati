@@ -37,18 +37,21 @@ export function SelectField({ data, label, desc }: SelectFieldProps) {
             id={field.name}
             aria-invalid={isInvalid}
             className="min-w-[180px]"
+            onBlur={field.handleBlur}
           >
             <SelectValue placeholder="Vybrat" />
           </SelectTrigger>
           <SelectContent position="popper">
             {data.map((d) => (
-              <SelectItem key={d.id} value={d.name}>
+              <SelectItem key={d.id} value={d.id}>
                 {d.name}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
-        <FieldDescription>{desc}</FieldDescription>
+        <FieldDescription className="text-xs text-slate-500">
+          {desc}
+        </FieldDescription>
         <FieldErrors meta={field.state.meta} />
       </FieldContent>
     </Field>

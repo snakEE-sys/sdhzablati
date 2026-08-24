@@ -11,21 +11,23 @@ export function TimeField({ label, desc }: TimeFieldProps) {
   const field = useFieldContext<string>();
 
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+
   return (
-    <Field>
+    <Field data-invalid={isInvalid}>
       <FieldContent>
         <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
         <Input
           type="time"
           id={field.name}
           aria-invalid={isInvalid}
-          defaultValue="12:00:00"
           value={field.state.value}
           onChange={(e) => field.handleChange(e.target.value)}
           onBlur={field.handleBlur}
           className="bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none"
         />
-        <FieldDescription>{desc}</FieldDescription>
+        <FieldDescription className="text-xs text-slate-500">
+          {desc}
+        </FieldDescription>
         <FieldErrors meta={field.state.meta} />
       </FieldContent>
     </Field>

@@ -8,7 +8,7 @@ import {
   Users,
 } from "lucide-react";
 
-export const Cinnost = () => {
+export function Cinnost() {
   return (
     <>
       <section id="cinnost" className="py-16">
@@ -98,4 +98,4 @@ export const Cinnost = () => {
       </section>
     </>
   );
-};
+}

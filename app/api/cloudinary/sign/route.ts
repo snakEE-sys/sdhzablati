@@ -1,9 +1,9 @@
 import cloudinary from "@/lib/cloudinary";
-import { getSession } from "@/utils/auth-server";
+import { getServerSession } from "@/utils/auth-server";
 import { tryCatch } from "@/lib/utils/try-catch";
 
 export async function POST(req: Request) {
-  const session = await getSession();
+  const session = await getServerSession();
   if (!session) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       timestamp,
       folder: body.folder,
     },
-    process.env.CLOUDINARY_API_SECRET!
+    process.env.CLOUDINARY_API_SECRET!,
   );
 
   return Response.json({

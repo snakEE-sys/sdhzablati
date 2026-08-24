@@ -29,7 +29,7 @@ export function DateField({ label, desc }: DateFieldProps) {
               variant="outline"
               className={cn(
                 "w-full justify-start text-left font-normal",
-                !field.state.value && "text-muted-foreground"
+                !field.state.value && "text-muted-foreground",
               )}
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
@@ -42,6 +42,8 @@ export function DateField({ label, desc }: DateFieldProps) {
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
+              locale={cs}
+              onDayBlur={field.handleBlur}
               mode="single"
               selected={field.state.value}
               onSelect={(date) => {
@@ -52,7 +54,9 @@ export function DateField({ label, desc }: DateFieldProps) {
             />
           </PopoverContent>
         </Popover>
-        <FieldDescription>{desc}</FieldDescription>
+        <FieldDescription className="text-xs text-slate-500">
+          {desc}
+        </FieldDescription>
         <FieldErrors meta={field.state.meta} />
       </FieldContent>
     </Field>

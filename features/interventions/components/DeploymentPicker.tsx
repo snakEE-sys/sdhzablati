@@ -40,6 +40,7 @@ export function DeploymentPicker({
       quantity: qty,
     });
 
+    setUnitId("");
     setVehicleId("");
     setQty(1);
   };
@@ -48,7 +49,7 @@ export function DeploymentPicker({
     <div className="p-4 border rounded-xl bg-muted/40 space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="space-y-1.5">
-          <Label className="text-xs">Unit</Label>
+          <Label className="text-xs">Jednotka</Label>
           <Select
             value={unitId}
             onValueChange={(v) => {
@@ -57,7 +58,7 @@ export function DeploymentPicker({
             }}
           >
             <SelectTrigger className="bg-background">
-              <SelectValue placeholder="Select Unit" />
+              <SelectValue placeholder="Vyberte jednotku" />
             </SelectTrigger>
             <SelectContent>
               {units.map((u) => (
@@ -70,14 +71,14 @@ export function DeploymentPicker({
         </div>
 
         <div className="space-y-1.5">
-          <Label className="text-xs">Vehicle</Label>
+          <Label className="text-xs">Vozidlo</Label>
           <Select
             value={vehicleId}
             onValueChange={setVehicleId}
             disabled={!unitId}
           >
             <SelectTrigger className="bg-background">
-              <SelectValue placeholder="Select Vehicle" />
+              <SelectValue placeholder="Vyberte vozidlo" />
             </SelectTrigger>
             <SelectContent>
               {vehicles.map((v) => (
@@ -126,12 +127,12 @@ export function DeploymentPicker({
           disabled={!vehicleId || isDuplicate}
           onClick={handleAdd}
         >
-          <PlusCircle className="mr-2 h-4 w-4" /> Add Vehicle
+          <PlusCircle className="mr-2 h-4 w-4" /> Přidat vozidlo
         </Button>
       </div>
       {isDuplicate && (
         <p className="text-[10px] text-destructive text-right">
-          Already added to this unit
+          Vybrané vozidlo je již spojeno s touto jednotkou.
         </p>
       )}
     </div>

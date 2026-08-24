@@ -8,8 +8,9 @@ export function RelatedPosts({
 }: RelatedPostsProps) {
   if (!posts) return null;
   const relatedPosts = posts.filter(
-    (p) => p.slug !== currentSlug && p.category === currentCategory
+    (p) => p.slug !== currentSlug && p.category === currentCategory,
   );
+  if (!relatedPosts) return null;
 
   return (
     <section className="py-16 bg-slate-50">

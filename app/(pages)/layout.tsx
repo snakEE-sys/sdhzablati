@@ -1,13 +1,15 @@
-import { Navbar } from "@/app/components/Navbar";
-import Footer from "@/app/components/Footer";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default function PagesLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div>
-      <Navbar />
-      {children}
+      <div>
+        <Navbar />
+        {children}
+      </div>
       <Footer />
     </div>
   );

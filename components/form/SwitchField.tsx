@@ -24,6 +24,7 @@ export function SwitchField({ label, desc }: SwitchFieldProps) {
         id={field.name}
         name={field.name}
         checked={field.state.value}
+        onBlur={field.handleBlur}
         onCheckedChange={field.handleChange}
         aria-invalid={isInvalid}
       />

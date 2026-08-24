@@ -2,146 +2,132 @@
 
 import { signUp } from "@/utils/auth-client";
 import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { formSchema } from "@/utils/auth-schema"
-
-import { Button } from "@/components/ui/button"
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import {CardDescription, CardHeader, CardTitle, CardContent} from "@/components/ui/card";
-import {useState} from "react";
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardContent,
+} from "@/components/ui/card";
+import { useState } from "react";
 import Image from "next/image";
 import AuthError from "@/app/components/errors/authError";
 
+import { useAppForm } from "@/components/form";
+import { signUpSchema } from "@/utils/auth-schema";
+
 const SignUp = () => {
-    const router = useRouter();
+  const router = useRouter();
+  const [error, setError] = useState<string>();
 
-    const [error, setError] = useState<string>();
-
-
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            passwordConfirmation: "",
+  const form = useAppForm({
+    formId: "signUpForm",
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    },
+    validators: {
+      onBlur: signUpSchema,
+    },
+    onSubmit: async ({ value }) =>
+      await signUp.email({
+        email: value.email,
+        password: value.password,
+        name: value.firstName + " " + value.lastName,
+        callbackURL: "/dashboard",
+        fetchOptions: {
+          onError: (ctx) => {
+            setError(ctx.error.message);
+          },
+          onSuccess: () => {
+            router.push("/dashboard");
+          },
         },
-    })
+      }),
+  });
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        await signUp.email({
-            email: form.getValues("email"),
-            password: form.getValues("password"),
-            name: form.getValues("firstName") + " " + form.getValues("lastName"),
-            callbackURL: "/dashboard",
-            fetchOptions: {
-                onError: (ctx) => {
-                    setError(ctx.error.message);
-                },
-                onSuccess: () => {
-                    router.push("/dashboard");
-                },
-            },
-        });
-    }
+  return (
+    <div>
+      <CardHeader>
+        <Image
+          src="/logo.png"
+          alt="logo"
+          width="70"
+          height="70"
+          className="mx-auto"
+        />
+        <CardTitle className="text-2xl">Registrace</CardTitle>
+        <CardDescription>Vyplň údaje pro registraci</CardDescription>
+      </CardHeader>
+      <CardContent className="mt-4">
+        <form
+          id="signUpForm"
+          className="flex flex-col space-y-2"
+          onSubmit={(e) => {
+            (e.preventDefault(), form.handleSubmit());
+          }}
+        >
+          <form.AppField
+            name="firstName"
+            children={(field) => (
+              <field.TextField
+                label="Jméno"
+                desc="Zadejte své jméno"
+                type="text"
+              />
+            )}
+          />
 
-    return (
-        <div>
-            <CardHeader>
-            <Image src="/logo.png" alt="logo" width="70" height="70" className="mx-auto"/>
-            <CardTitle className="text-2xl">Registrace</CardTitle>
-            <CardDescription>
-                Vyplň údaje pro registraci
-            </CardDescription>
-        </CardHeader>
-        <CardContent className='mt-4'>
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
-                <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Křestní jméno</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Jan" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
+          <form.AppField
+            name="lastName"
+            children={(field) => (
+              <field.TextField
+                label="Příjmení"
+                desc="Zadejte své příjmení"
+                type="text"
+              />
+            )}
+          />
 
-                <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Příjmení</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Novák" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem className="grid gap-2">
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                <Input placeholder="jan.novak@gmail.com" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem className="grid gap-2">
-                            <FormLabel>Heslo</FormLabel>
-                            <FormControl>
-                                <Input type="password" placeholder="" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="passwordConfirmation"
-                    render={({ field }) => (
-                        <FormItem className="grid gap-2">
-                            <FormLabel>Potvrzení hesla</FormLabel>
-                            <FormControl>
-                                <Input type="password" placeholder="" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                {error ? <AuthError message={error}/> : null}
-                <Button type="submit">Registrovat se</Button>
-            </form>
-        </Form>
-        </CardContent>
-        </div>
-    )
-}
+          <form.AppField
+            name="email"
+            children={(field) => (
+              <field.TextField
+                label="E-mailová adresa"
+                desc="Zadejte svou e-mailovou adresu"
+                type="email"
+              />
+            )}
+          />
+          <form.AppField
+            name="password"
+            children={(field) => (
+              <field.TextField
+                label="Heslo"
+                desc="Zadejte heslo"
+                type="password"
+              />
+            )}
+          />
+          <form.AppField
+            name="passwordConfirmation"
+            children={(field) => (
+              <field.TextField
+                label="Potvrzení hesla"
+                desc="Zadejte znovu heslo"
+                type="password"
+              />
+            )}
+          />
+          {error ? <AuthError message={error} /> : null}
+          <form.AppForm>
+            <form.SubmitButton>Registrovat</form.SubmitButton>
+          </form.AppForm>
+        </form>
+      </CardContent>
+    </div>
+  );
+};
 export default SignUp;

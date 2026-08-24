@@ -6,6 +6,8 @@ import { DeploymentField } from "@/features/interventions/components/DeploymentF
 import { DateField } from "./DateField";
 import { TimeField } from "./TimeField";
 import { SelectField } from "./SelectField";
+import { ImageFileField } from "./ImageFileField";
+import { SubmitButton } from "./SubmitButton";
 
 export const { fieldContext, useFieldContext, formContext, useFormContext } =
   createFormHookContexts();
@@ -19,8 +21,11 @@ export const { useAppForm } = createFormHook({
     DeploymentField,
     DateField,
     TimeField,
+    ImageFileField,
   },
-  formComponents: {},
+  formComponents: {
+    SubmitButton,
+  },
   fieldContext,
   formContext,
 });
