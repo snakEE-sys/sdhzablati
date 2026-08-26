@@ -1,7 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
-export const AuthError = (error) => {
+export const AuthError = (error: string) => {
   return (
     <Alert variant="destructive">
       <AlertCircle className="h-4 w-4" />

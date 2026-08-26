@@ -1,3 +1,3 @@
-export function GaleriePage() {
+export default function GaleriePage() {
   return <div></div>;
 }
