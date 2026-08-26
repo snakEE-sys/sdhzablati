@@ -121,7 +121,7 @@ const SignUp = () => {
               />
             )}
           />
-          {error ? <AuthError message={error} /> : null}
+          {error ? <AuthError error={error} /> : null}
           <form.AppForm>
             <form.SubmitButton>Registrovat</form.SubmitButton>
           </form.AppForm>
