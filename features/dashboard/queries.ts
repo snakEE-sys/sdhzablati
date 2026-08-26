@@ -17,7 +17,7 @@ export type DashboardStats = {
 const year = new Date().getFullYear();
 
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const yearStart = `${year}-01-01`;
+  const yearStart = new Date(year, 0, 1);
 
   const [interventionRows, interventionYearRows, postRows, galleryCount] =
     await Promise.all([
