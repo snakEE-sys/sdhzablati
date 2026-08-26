@@ -2,11 +2,7 @@ import { User } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { getCategoryColor } from "@/utils/category-color";
-
-type PostSidebarProps = {
-  author: string;
-  category: string;
-}
+import { PostSidebarProps } from "../types";
 
 export function PostSidebar({ author, category }: PostSidebarProps) {
   return (
@@ -19,7 +15,7 @@ export function PostSidebar({ author, category }: PostSidebarProps) {
               <User className="h-8 w-8 text-slate-400" />
             </div>
             <div>
-              <h4 className="font-bold">{author}</h4>
+              <h4 className="font-bold">{author.name}</h4>
               <p className="text-sm text-slate-500">Člen SDH</p>
             </div>
           </div>
@@ -31,8 +27,8 @@ export function PostSidebar({ author, category }: PostSidebarProps) {
 
       <h3 className="text-xl font-bold mb-4">Kategorie</h3>
       <div className="flex flex-wrap gap-2 mb-8">
-        <Badge className={`${getCategoryColor(category)} rounded-full`}>
-          {category}
+        <Badge className={`${getCategoryColor(category.name)} rounded-full`}>
+          {category.name}
         </Badge>
       </div>
     </div>

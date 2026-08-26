@@ -6,6 +6,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
+import { TextStyle } from "@tiptap/extension-text-style";
 import Link from "@tiptap/extension-link";
 import HorizontalRule from "@tiptap/extension-horizontal-rule";
 import Color from "@tiptap/extension-color";
@@ -63,9 +64,8 @@ export function TiptapEditor({ content = "", onChange }: TiptapEditorProps) {
           keepMarks: true,
           keepAttributes: false,
         },
-        strike: false, // We'll use the dedicated Strike extension
       }),
-      Underline,
+      TextStyle,
       Highlight.configure({
         multicolor: true,
       }),
@@ -73,13 +73,6 @@ export function TiptapEditor({ content = "", onChange }: TiptapEditorProps) {
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
-      Link.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: "cursor-pointer",
-        },
-      }),
-      HorizontalRule,
     ],
     content,
     editorProps: {
@@ -111,6 +104,7 @@ export function TiptapEditor({ content = "", onChange }: TiptapEditorProps) {
   }) => (
     <Button
       variant={isActive ? "default" : "ghost"}
+      type="button"
       size="sm"
       onClick={onClick}
       title={title}
@@ -214,7 +208,7 @@ export function TiptapEditor({ content = "", onChange }: TiptapEditorProps) {
             <PopoverContent className="w-48">
               <div className="grid grid-cols-6 gap-1">
                 {colors.map((color) => (
-                  <button
+                  <Button
                     key={color}
                     className="w-6 h-6 rounded border border-gray-300 hover:scale-110 transition-transform"
                     style={{ backgroundColor: color }}

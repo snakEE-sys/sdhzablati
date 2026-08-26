@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   pgTable,
   text,
@@ -25,7 +26,7 @@ export const user = pgTable("user", {
   role: text("role", { enum: ["Editor", "Administrátor"] })
     .default("Editor")
     .notNull(),
-  description: text("description"),
+  description: text("description").notNull(),
 });
 
 export const session = pgTable(
@@ -162,21 +163,32 @@ export const posts_categories = pgTable("posts_categories", {
   name: text("name").notNull(),
 });
 
-export const posts = pgTable("posts", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  slug: text("slug").notNull().unique(),
-  title: text("title").notNull(),
-  content: text("content").notNull(),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
-  authorId: text("author_id")
-    .notNull()
-    .references(() => user.id),
-  categoryId: uuid("category_id")
-    .notNull()
-    .references(() => posts_categories.id),
-  featured: boolean("featured").notNull().default(false),
-  published: boolean("published").notNull().default(false),
-  excerpt: text("excerpt").notNull(),
-  image: text("image"),
-});
+export const posts = pgTable(
+  "posts",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    slug: text("slug").notNull().unique(),
+    title: text("title").notNull(),
+    content: text("content").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at")
+      .notNull()
+      .defaultNow()
+      .$onUpdate(() => new Date()),
+    authorId: text("author_id")
+      .notNull()
+      .references(() => user.id),
+    categoryId: uuid("category_id")
+      .notNull()
+      .references(() => posts_categories.id),
+    featured: boolean("featured").notNull().default(false),
+    published: boolean("published").notNull().default(false),
+    excerpt: text("excerpt").notNull(),
+    image: text("image"),
+  },
+  (table) => [
+    uniqueIndex("one_featured_post")
+      .on(table.featured)
+      .where(sql`${table.featured} = true`),
+  ],
+);

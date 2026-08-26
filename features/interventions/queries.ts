@@ -100,12 +100,7 @@ export async function getInterventionById(
   );
 
   if (error) throw error;
-
   if (!intervention) return null;
-
-  if (!intervention.category || !intervention.subcategory) {
-    throw new Error("Category or subcategory is missing");
-  }
 
   return {
     id: intervention.id,
@@ -115,17 +110,11 @@ export async function getInterventionById(
     time: intervention.time,
     address: intervention.address,
     description: intervention.description,
-    deployment: intervention.interventionDeployments.map((d) => {
-      if (!d.unit || !d.vehicle) {
-        throw new Error("Deployment is missing");
-      }
-
-      return {
-        id: d.id,
-        unit: d.unit,
-        vehicle: d.vehicle,
-        quantity: d.quantity,
-      };
-    }),
+    deployment: intervention.interventionDeployments.map((d) => ({
+      id: d.id,
+      unit: d.unit,
+      vehicle: d.vehicle,
+      quantity: d.quantity,
+    })),
   };
 }

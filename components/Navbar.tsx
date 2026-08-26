@@ -51,13 +51,17 @@ export function Navbar() {
                 <NavigationMenuTrigger>Sbor</NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[380px] gap-3 md:w-[380px]">
-                    <ListItem href="/historie" title="Historie" icon={Zap}>
+                    <ListItem href="/sbor/historie" title="Historie" icon={Zap}>
                       Historie našeho sboru od jeho založení.
                     </ListItem>
-                    <ListItem href="/sport" title="Sport" icon={BookOpen}>
+                    <ListItem href="/sbor/sport" title="Sport" icon={BookOpen}>
                       Naše sportovní úspěchy a soutěže.
                     </ListItem>
-                    <ListItem href="/sponzori" title="Sponzoři" icon={Settings}>
+                    <ListItem
+                      href="/sbor/sponzori"
+                      title="Sponzoři"
+                      icon={Settings}
+                    >
                       Firmy, jednotlivci bez kterých by to nešlo.
                     </ListItem>
                   </ul>
@@ -68,16 +72,24 @@ export function Navbar() {
                 <NavigationMenuContent>
                   <ul className="grid w-[380px] gap-3 md:w-[380px]">
                     <ListItem
-                      href="/informace"
+                      href="/jednotka/informace"
                       title="Informace"
                       icon={Settings}
                     >
                       Informace o jednotce jako celku.
                     </ListItem>
-                    <ListItem href="/technika" title="Technika" icon={Zap}>
+                    <ListItem
+                      href="/jednotka/technika"
+                      title="Technika"
+                      icon={Zap}
+                    >
                       Naše technika a vybavení.
                     </ListItem>
-                    <ListItem href="/vyjezdy" title="Výjezdy" icon={BookOpen}>
+                    <ListItem
+                      href="/jednotka/vyjezdy"
+                      title="Výjezdy"
+                      icon={BookOpen}
+                    >
                       Mimořádné události, které jsme řešili.
                     </ListItem>
                   </ul>

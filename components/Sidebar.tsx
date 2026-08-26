@@ -4,20 +4,18 @@ import {
   BarChart3,
   FileText,
   ImageIcon,
-  LogOut,
   Settings,
   Truck,
   ChevronRight,
 } from "lucide-react";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { useSession, signOut } from "@/utils/auth-client";
+
 import Image from "next/image";
 import logo from "@/public/logo.png";
-import { Session } from "@/utils/auth";
+import { Suspense } from "react";
+import { UserProfile } from "./Profile";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Přehled", icon: BarChart3 },
@@ -29,17 +27,6 @@ const NAV_ITEMS = [
 
 export function Sidebar({ className }: { className?: string }) {
   const pathname = usePathname();
-  const router = useRouter();
-
-  const session = useSession();
-
-  async function handleSignOut() {
-    await signOut({
-      fetchOptions: {
-        onSuccess: () => router.push("/"),
-      },
-    });
-  }
 
   return (
     <div
@@ -69,7 +56,10 @@ export function Sidebar({ className }: { className?: string }) {
         {/* Navigation */}
         <nav className="flex-1 px-3 py-6 space-y-1">
           {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive =
+              item.href === "/dashboard"
+                ? pathname === "/dashboard"
+                : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
@@ -95,38 +85,9 @@ export function Sidebar({ className }: { className?: string }) {
         </nav>
 
         {/* User section */}
-        <div className="p-3 space-y-3">
-          <div className="bg-white rounded-xl p-3.5 shadow-sm border border-slate-200/60">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="relative">
-                <Avatar className="h-10 w-10 ring-2 ring-slate-100">
-                  <AvatarImage
-                    src="/images/user_placeholder.png"
-                    alt="User Avatar"
-                  />
-                </Avatar>
-                <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-green-500 rounded-full ring-2 ring-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-slate-900 truncate">
-                  {session.data?.user.name}
-                </p>
-                <p className="text-xs text-slate-500 font-medium">
-                  {session.data?.user.role}
-                </p>
-              </div>
-            </div>
-            <Button
-              variant="ghost"
-              className="w-full justify-start gap-2.5 text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 h-9 font-medium"
-              size="sm"
-              onClick={handleSignOut}
-            >
-              <LogOut className="h-4 w-4" />
-              Odhlásit se
-            </Button>
-          </div>
-        </div>
+        <Suspense fallback="Loading..">
+          <UserProfile />
+        </Suspense>
       </div>
     </div>
   );

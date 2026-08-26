@@ -15,12 +15,12 @@ export default function PostList({
   posts: Post[];
   categories: Category[];
 }) {
-  const [category, setCategory] = useState<string>("Všechny");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Všechny");
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const filteredPosts = posts.filter((p) => {
     const matchesCategory =
-      !category || category === "Všechny" || p.category === category;
+      selectedCategory === "Všechny" || p.category.name === selectedCategory;
 
     const matchesSearch =
       !searchTerm || p.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -39,8 +39,8 @@ export default function PostList({
             <div className="w-full md:w-2/3 flex flex-wrap gap-2 justify-center md:justify-end">
               <PostCategoryFilter
                 categories={categories}
-                value={category}
-                onChange={setCategory}
+                value={selectedCategory}
+                onChange={setSelectedCategory}
               />
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function PostList({
         <div className="container mx-auto">
           <FeaturedPost posts={posts} />
           <h2 className="text-2xl font-bold mb-6">Všechny aktuality</h2>
-          {filteredPosts && filteredPosts.length > 0 ? (
+          {filteredPosts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredPosts.map((p: Post) => (
                 <PostCard key={p.slug} post={p} />
@@ -68,7 +68,7 @@ export default function PostList({
                 className="rounded-full border-red-600 text-red-600 hover:bg-red-50"
                 onClick={() => {
                   setSearchTerm("");
-                  setCategory("Všechny");
+                  setSelectedCategory("Všechny");
                 }}
               >
                 Zobrazit všechny aktuality

@@ -11,6 +11,8 @@ import { RelatedPosts } from "@/features/posts/components/RelatedPosts";
 import { PostSidebar } from "@/features/posts/components/PostSidebar";
 import { ArrowLeft } from "lucide-react";
 
+export const instant = false;
+
 export default async function Page({
   params,
 }: {
@@ -22,6 +24,7 @@ export default async function Page({
     getAllPosts(),
   ]);
   if (!post) return notFound();
+  if (!allPosts) return null;
 
   return (
     <div className="flex flex-col min-h-[100dvh]">
@@ -62,7 +65,7 @@ export default async function Page({
         <RelatedPosts
           posts={allPosts}
           currentSlug={post.slug}
-          currentCategory={post.category}
+          currentCategory={post.category.id}
         />
       </main>
     </div>

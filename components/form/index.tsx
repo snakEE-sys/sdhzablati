@@ -8,6 +8,7 @@ import { TimeField } from "./TimeField";
 import { SelectField } from "./SelectField";
 import { ImageFileField } from "./ImageFileField";
 import { SubmitButton } from "./SubmitButton";
+import { RichTextField } from "./RichTextField";
 
 export const { fieldContext, useFieldContext, formContext, useFormContext } =
   createFormHookContexts();
@@ -22,6 +23,7 @@ export const { useAppForm } = createFormHook({
     DateField,
     TimeField,
     ImageFileField,
+    RichTextField,
   },
   formComponents: {
     SubmitButton,

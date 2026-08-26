@@ -1,81 +1,16 @@
+import { formatDate } from "@/app/hooks/formatDate";
 import { Button } from "@/components/ui/button";
 import { getAllPosts } from "@/features/posts/queries";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-/** Set to `false` to load posts from the database. */
-const USE_MOCK_AKTUALITY_POSTS = true;
-
-type AktualityPost = NonNullable<
-  Awaited<ReturnType<typeof getAllPosts>>
->[number];
-
-const MOCK_AKTUALITY_POSTS: AktualityPost[] = [
-  {
-    id: "00000000-0000-4000-8000-000000000001",
-    slug: "mock-soutez-hasicke-mladeze",
-    title: "Úspěch naší mládeže na okresní soutěži",
-    date: "3. května 2026",
-    content: "",
-    author: {
-      id: "mock-author",
-      name: "JSDH Záblatí",
-      description: null,
-    },
-    featured: true,
-    published: true,
-    excerpt:
-      "Naši mladí hasiči obsadili první místo v disciplíně štafeta a ukázali, že trénink se vyplácí.",
-    category: "Mládež",
-    image: "/images/landing.jpeg",
-  },
-  {
-    id: "00000000-0000-4000-8000-000000000002",
-    slug: "mock-profilak-zbrojnice",
-    title: "Proběhl kontrolní den techniky ve zbrojnici",
-    date: "28. dubna 2026",
-    content: "",
-    author: {
-      id: "mock-author",
-      name: "JSDH Záblatí",
-      description: null,
-    },
-    featured: false,
-    published: true,
-    excerpt:
-      "Zkontrolovali jsme vozidla, čerpadla a výstroj. Vše připraveno na sezónu.",
-    category: "Technika",
-    image: "/hero.png",
-  },
-  {
-    id: "00000000-0000-4000-8000-000000000003",
-    slug: "mock-detsky-den",
-    title: "Pozvánka na dětský den u hasičů",
-    date: "15. dubna 2026",
-    content: "",
-    author: {
-      id: "mock-author",
-      name: "JSDH Záblatí",
-      description: null,
-    },
-    featured: false,
-    published: true,
-    excerpt:
-      "V sobotu čeká děti projížďka v casovně, ukázky výstroje a opékání buřtů.",
-    category: "Akce",
-    image: "/images/landing.jpeg",
-  },
-];
-
 function postImageSrc(image: string | undefined) {
   return image && image.length > 0 ? image : "/images/landing.jpeg";
 }
 
 export default async function Aktuality() {
-  const list = USE_MOCK_AKTUALITY_POSTS
-    ? MOCK_AKTUALITY_POSTS
-    : await getAllPosts({ published: true, limit: 3 });
+  const list = await getAllPosts({ published: true, limit: 3 });
   const posts = list ?? [];
   const [featured, ...rest] = posts;
 
@@ -136,7 +71,7 @@ export default async function Aktuality() {
                 <div className="absolute inset-0 bg-linear-to-t from-black/75 via-black/25 to-transparent" />
                 {featured.category ? (
                   <span className="absolute top-5 left-5 rounded-full bg-white/95 px-3 py-1 text-xs font-medium text-custom-dark-red">
-                    {featured.category}
+                    {featured.category.name}
                   </span>
                 ) : null}
                 <div className="absolute top-4 right-4 bg-custom-dark-red rounded-full p-3">
@@ -144,7 +79,7 @@ export default async function Aktuality() {
                 </div>
                 <div className="absolute bottom-0 left-0 p-6 md:p-8 space-y-2 max-w-3xl">
                   <p className="text-white/75 text-sm font-light">
-                    {featured.date}
+                    {formatDate(featured.date)}
                     {featured.author?.name ? ` · ${featured.author.name}` : ""}
                   </p>
                   <h3 className="text-white text-xl md:text-2xl font-semibold leading-snug">
@@ -173,7 +108,7 @@ export default async function Aktuality() {
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
                     {post.category ? (
                       <span className="absolute top-4 left-4 z-10 rounded-full bg-white/95 px-3 py-1 text-xs font-medium text-custom-dark-red">
-                        {post.category}
+                        {post.category.name}
                       </span>
                     ) : null}
                     <div className="absolute top-3 right-3 bg-custom-dark-red rounded-full p-2.5">
@@ -181,7 +116,7 @@ export default async function Aktuality() {
                     </div>
                     <div className="absolute bottom-0 left-0 p-6 md:p-8 space-y-2">
                       <p className="text-white/75 text-sm font-light">
-                        {post.date}
+                        {formatDate(post.date)}
                         {post.author?.name ? ` · ${post.author.name}` : ""}
                       </p>
                       <h3 className="text-white text-xl md:text-2xl font-semibold leading-snug">

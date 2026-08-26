@@ -1,10 +1,14 @@
 import PostList from "@/features/posts/components/PostList";
+import { getAllPosts, getCategories } from "@/features/posts/queries";
 
 export default async function AktualityPage() {
-  /*const [posts, categories] = await Promise.all([
-    getAllPosts(),
+  const [posts, categories] = await Promise.all([
+    getAllPosts({ published: true }),
     getCategories(),
-  ]);*/
+  ]);
+
+  console.log(posts);
+  if (!posts) return null;
 
   return (
     <div>

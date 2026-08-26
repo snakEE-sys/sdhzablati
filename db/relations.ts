@@ -21,10 +21,12 @@ export const relations = defineRelations(schema, (r) => ({
     unit: r.one.units({
       from: r.interventionDeployments.unitId,
       to: r.units.id,
+      optional: false,
     }),
     vehicle: r.one.vehicles({
       from: r.interventionDeployments.vehicleId,
       to: r.vehicles.id,
+      optional: false,
     }),
   },
   interventions: {
@@ -32,10 +34,12 @@ export const relations = defineRelations(schema, (r) => ({
     category: r.one.categories({
       from: r.interventions.categoryId,
       to: r.categories.id,
+      optional: false,
     }),
     subcategory: r.one.subcategories({
       from: r.interventions.subcategoryId,
       to: r.subcategories.id,
+      optional: false,
     }),
   },
   units: {
@@ -56,11 +60,16 @@ export const relations = defineRelations(schema, (r) => ({
     category: r.one.posts_categories({
       from: r.posts.categoryId,
       to: r.posts_categories.id,
+      optional: false,
     }),
     author: r.one.user({
       from: r.posts.authorId,
       to: r.user.id,
+      optional: false,
     }),
+  },
+  posts_categories: {
+    posts: r.many.posts(),
   },
   session: {
     user: r.one.user({

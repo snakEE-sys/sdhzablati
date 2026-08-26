@@ -1,16 +1,15 @@
 "use server";
 
-import { getServerSession } from "@/utils/auth-server";
 import { db } from "@/db/db";
 import { InterventionValues } from "./schema";
 import { tryCatch } from "@/lib/utils/try-catch";
 import { interventionDeployments, interventions } from "@/db/schema";
-import { revalidatePath, revalidateTag, updateTag } from "next/cache";
+import { updateTag } from "next/cache";
 import { eq } from "drizzle-orm";
+import { isAuthorized } from "@/utils/isAuthorized";
 
 export async function createIntervention(intervention: InterventionValues) {
-  const session = await getServerSession();
-  if (!session) throw new Error("Unauthorized");
+  await isAuthorized();
 
   const { error } = await tryCatch(
     db.transaction(async (tx) => {
@@ -38,7 +37,7 @@ export async function createIntervention(intervention: InterventionValues) {
   );
   if (error) throw error;
 
-  revalidatePath("/dashboard/interventions");
+  updateTag("interventions");
   return { success: true };
 }
 
@@ -46,6 +45,8 @@ export async function editIntervention(
   interventionId: string,
   intervention: InterventionValues,
 ) {
+  await isAuthorized();
+
   const { error } = await tryCatch(
     db.transaction(async (tx) => {
       await tx
@@ -86,6 +87,8 @@ export async function editIntervention(
 }
 
 export async function deleteIntervention(id: string) {
+  await isAuthorized();
+
   const { error } = await tryCatch(
     db.delete(interventions).where(eq(interventions.id, id)),
   );

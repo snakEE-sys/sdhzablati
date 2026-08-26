@@ -6,14 +6,14 @@ export function useCloudinaryUpload() {
       fetch("/api/cloudinary/sign", {
         method: "POST",
         body: JSON.stringify({ folder }),
-      })
+      }),
     );
 
     if (signResError) return signResError.message;
     if (!signRes.ok) return new Error("Failed to get upload signature");
 
     const { data: credentials, error: credentialsError } = await tryCatch(
-      signRes.json()
+      signRes.json(),
     );
     if (credentialsError) return credentialsError.message;
 
@@ -31,19 +31,19 @@ export function useCloudinaryUpload() {
 
           const res = await fetch(
             `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-            { method: "POST", body: formData }
+            { method: "POST", body: formData },
           );
 
           if (!res.ok) throw new Error(`Upload failed for ${file.name}`);
 
           return res.json();
-        })
-      )
+        }),
+      ),
     );
 
     if (uploadError) return uploadError.message;
 
-    return [results.map((r: { public_id: string }) => r.public_id)];
+    return results.map((r: { public_id: string }) => r.public_id);
   }
   return { uploadImages };
 }

@@ -1,12 +1,13 @@
 export type Post = {
+  id: string;
   title: string;
   slug: string;
   excerpt: string;
   featured: boolean;
   image?: string;
-  date: string;
-  author: string;
-  category: string;
+  date: Date;
+  author: Author;
+  category: Category;
   content: string;
   published: boolean;
 };
@@ -18,6 +19,17 @@ export type RelatedPostsProps = {
 };
 
 export type Category = {
-  id: number;
+  id: string;
   name: string;
+};
+
+type Author = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export type PostSidebarProps = {
+  author: Author;
+  category: Category;
 };
