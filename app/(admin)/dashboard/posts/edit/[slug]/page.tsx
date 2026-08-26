@@ -3,12 +3,14 @@ import Link from "next/link";
 import { ArrowLeft, Pencil } from "lucide-react";
 import { EditPostForm } from "@/features/posts/components/EditPostForm";
 import { getCategories, getPostBySlug } from "@/features/posts/queries";
+import { connection } from "next/server";
 
 export default async function EditPostPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  await connection();
   const { slug } = await params;
 
   const [categories, post] = await Promise.all([
