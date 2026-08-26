@@ -1,16 +1,24 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Pencil } from "lucide-react";
+
 import { EditPostForm } from "@/features/posts/components/EditPostForm";
 import { getCategories, getPostBySlug } from "@/features/posts/queries";
-import { connection } from "next/server";
 
-export default async function EditPostPage({
-  params,
-}: {
+type Props = {
   params: Promise<{ slug: string }>;
-}) {
-  await connection();
+};
+
+export default function EditPostPage({ params }: Props) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditPostContent params={params} />
+    </Suspense>
+  );
+}
+
+async function EditPostContent({ params }: Props) {
   const { slug } = await params;
 
   const [categories, post] = await Promise.all([
@@ -25,7 +33,6 @@ export default async function EditPostPage({
   return (
     <div className="min-h-screen bg-linear-to-b from-slate-50 to-white">
       <div className="mx-auto px-4 py-6 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="mb-8">
           <Link
             href="/dashboard/posts"
@@ -52,7 +59,6 @@ export default async function EditPostPage({
           </div>
         </div>
 
-        {/* Form Card */}
         <div className="relative overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm">
           <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-red-500/5 via-transparent to-transparent" />
 
@@ -61,7 +67,6 @@ export default async function EditPostPage({
           </div>
         </div>
 
-        {/* Help */}
         <div className="mt-6 rounded-xl bg-slate-50 border border-slate-200/60 p-4">
           <p className="text-sm text-slate-600">
             <span className="font-semibold text-slate-900">Tip:</span> Všechna
