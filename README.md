@@ -2,7 +2,10 @@
 
 ## TODO
 
-- Add tanstack table for interventions displaying
+- combine date and time together
+- usePathname error still
+- fix tiptap isActive toolbar buttons
+- Add tanstack table for interventions/posts displaying
 - Add Gallery
 - calendar with events
 - Add Udalosti create in dashboard
