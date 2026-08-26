@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./editor-styles.css";
-import QueryProvider from "@/hooks/QueryProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,7 +39,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${monumentExtended.variable} antialiased`}
       >
-        <QueryProvider>{children}</QueryProvider>
+        {children}
       </body>
     </html>
   );

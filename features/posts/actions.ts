@@ -86,7 +86,7 @@ export async function editPost(postId: string, post: PostsValues) {
   }
 
   updateTag("posts");
-  updateTag(`post-${postId}`);
+  updateTag(`post-${slugify(post.title)}`);
 
   return { success: true };
 }
