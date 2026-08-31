@@ -11,7 +11,9 @@ type FeaturedPostProps = {
 
 export function FeaturedPost({ post }: FeaturedPostProps) {
   const image =
-    post.image && post.image.length > 0 ? post.image : "/images/landing.jpeg";
+    post.image && post.image.length > 0
+      ? post.image
+      : "/images/sponsors/nsa.png";
 
   return (
     <Link
@@ -19,7 +21,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
       className="group relative block overflow-hidden rounded-3xl min-h-[500px] md:min-h-[600px]"
     >
       <Image
-        src={image}
+        src="/images/sponsors/nsa.png"
         alt={post.title}
         fill
         priority
