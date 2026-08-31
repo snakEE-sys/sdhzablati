@@ -1,5 +1,5 @@
 import cloudinary from "@/lib/cloudinary";
-import { getServerSession } from "@/utils/auth-server";
+import { getServerSession } from "@/features/auth/auth-server";
 import { tryCatch } from "@/lib/utils/try-catch";
 
 export async function POST(req: Request) {

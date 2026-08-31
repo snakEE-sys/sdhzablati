@@ -20,7 +20,6 @@ export default function ContactPage() {
   return (
     <div className="flex flex-col min-h-dvh">
       <main className="flex-1 pt-24 md:pt-28 lg:pt-32">
-        {/* Intro — stejný rytmus jako úvod na /aktuality */}
         <section className="overflow-hidden py-12 md:py-18 lg:py-24 bg-white rounded-3xl m-2 md:m-4 relative">
           <div
             className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-custom-red/8 blur-3xl"
@@ -36,13 +35,11 @@ export default function ContactPage() {
               </h1>
               <p className="text-custom-light-grey font-light text-base md:text-lg leading-relaxed max-w-prose mx-auto">
                 Dotazy k členství, akcím, výcviku nebo spolupráci nám napište
-                nebo zavolejte. Zbrojnici najdete přímo v Bohumíně – Záblatí.
+                nebo zavolejte. Zbrojnici najdete přímo v Bohumíně - Záblatí.
               </p>
             </div>
           </div>
         </section>
-
-        {/* Obsah — pink panel + karty jako na landing */}
         <section className="relative overflow-hidden py-12 md:py-18 lg:py-24 bg-custom-pink rounded-3xl m-2 md:m-4 mt-3 md:mt-4">
           <div className="container relative mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
@@ -51,7 +48,7 @@ export default function ContactPage() {
                   Rychlé spojení
                 </h2>
                 <p className="text-custom-light-grey font-light text-base leading-relaxed">
-                  Nejjednodušší je e-mail nebo telefon — odpovídáme, jen jak to
+                  Nejjednodušší je e-mail nebo telefon - odpovídáme, jen jak to
                   jde.
                 </p>
 

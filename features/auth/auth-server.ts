@@ -6,3 +6,13 @@ export async function getServerSession() {
     headers: await headers(),
   });
 }
+
+export async function requireAuth() {
+  const session = await getServerSession();
+
+  if (!session) {
+    throw new Error("Unauthenticated");
+  }
+
+  return session;
+}

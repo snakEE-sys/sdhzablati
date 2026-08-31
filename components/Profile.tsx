@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, AvatarImage } from "./ui/avatar";
-import { signOut, useSession } from "@/utils/auth-client";
+import { signOut, useSession } from "@/features/auth/auth-client";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";

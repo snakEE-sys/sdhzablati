@@ -1,154 +1,102 @@
-import { Member, Vehicle } from "./types";
+// features/unit/data/vehicles.ts
 
-export const members: Member[] = [
-    {
-      name: "Jan Plasgura",
-      role: "Velitel jednotky",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Stanislav Tyrala",
-      role: "Velitel družstva",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Tomáš Ključik",
-      role: "Strojník",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Marek Ključik",
-      role: "Strojník",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Lukáš Korčík",
-      role: "Hasič",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Andrzej Grabowski",
-      role: "Hasič",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "David Olík",
-      role: "Hasič",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Daniel Bogdanowicz",
-      role: "Hasič",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Tomáš Laubr",
-      role: "Velitel družstva",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Michal Dadík",
-      role: "Hasič",
-      picture: "/images/user_placeholder.png",
-    },
-    {
-      name: "Jan Carbol",
-      role: "Hasič",
-      picture: "/images/user_placeholder.png"
-    }
-  ];
-  
-  // Údaje o technice
-export const technique: Record<string, Vehicle> = {
-    engine: {
-      name: "Cisternová automobilová stříkačka",
-      manufacter: "Renault Midlum 4x4",
-      manufacter_year: 2006,
-      description:
-        "Cisternová automobilová stříkačka Renault Midlum je určena pro přepravu požárního družstva 1+5 a hasebních prostředků pro požární zásah vodou nebo pěnou při použití nízkého nebo vysokého tlaku vody. Vozidlo je vybaveno požárním čerpadlem o výkonu 2400 l/min a nádrží na vodu o objemu 2500 litrů.",
-      parameters: [
-        "Objem nádrže na vodu: 2500 litrů",
-        "Objem nádrže na pěnidlo: 250 litrů",
-        "Čerpací zařízení: odstředivé, dvoustupňové",
-        "Jmenovitý průtok: 2400 l/min při 10 bar",
-        "Maximální sací výška: 7,5 m",
-        "Posádka: 1+5 osob",
-        "Rozměry (d×š×v): 7900×2550×3300 mm",
-        "Hmotnost: 14 000 kg",
-      ],
-      equipment: [
-        "Vysokotlaké hasicí zařízení",
-        "Asanační lišta",
-        "Osvětlovací stožár",
-        "Elektrocentrála",
-        "Motorová řetězová pila",
-        "Rozbrušovací pila",
-        "Dýchací přístroje",
-        "Prostředky pro likvidaci hmyzu",
-      ],
-      pictures: [
-        "/images/technika/cas/cas_1.jpeg",
-        "/images/technika/cas/cas_2.jpeg",
-        "/images/technika/cas/cas_3.jpeg",
-        "/images/technika/cas/cas_4.jpeg",
-      ],
-    },
-    vehicle: {
-      name: "Dopravní automobil",
-      manufacter: "VW Crafter",
-      manufacter_year: 2015,
-      description:
-        "Dopravní automobil VW Crafter slouží k přepravě hasičů k místu zásahu a pro logistickou podporu zásahů. Vozidlo je vybaveno základním hasičským vybavením pro prvotní zásah a speciálními prostředky pro technické zásahy.",
-      parameters: [
-        "Motor: 2.0 TDI 110 kW",
-        "Pohon: 4×2",
-        "Posádka: 1+8 osob",
-        "Rozměry (d×š×v): 6700×2100×2800 mm",
-        "Hmotnost: 3500 kg",
-      ],
-      equipment: [
-        "Přenosná motorová stříkačka",
-        "Elektrocentrála",
-        "Osvětlovací technika",
-        "Základní hasební prostředky",
-        "Lékárnička",
-        "Ruční vyprošťovací nástroje",
-        "Radiostanice",
-      ],
-      pictures: [
-        "/images/technika/da/da_1.jpeg",
-        "/images/technika/da/da_2.jpeg",
-        "/images/technika/da/da_3.jpeg",
-        "/images/technika/da/da_4.jpeg",
-      ],
-    },
-    boat: {
-      name: "Záchranářský člun",
-      manufacter: "Marine 450U",
-      manufacter_year: 2021,
-      description:
-        "Záchranářský člun Marine 450U je určen pro zásahy na vodní hladině, zejména při povodních a záchraně tonoucích osob. Člun je vybaven výkonným motorem a základním záchranářským vybavením.",
-      parameters: [
-        "Délka: 4,5 m",
-        "Šířka: 1,9 m",
-        "Hmotnost: 120 kg",
-        "Nosnost: 700 kg nebo 6 osob",
-        "Motor: Yamaha 50 HP",
-        "Materiál: Hypalon/Neopren",
-      ],
-      equipment: [
-        "Záchranné vesty",
-        "Házecí pytlíky",
-        "Záchranné lano",
-        "Pádla",
-        "Kotva",
-        "Čerpadlo pro odčerpávání vody",
-        "Lékárnička",
-      ],
-      pictures: [
-        "/placeholder.svg?height=600&width=800&text=Člun 1",
-        "/placeholder.svg?height=600&width=800&text=Člun 2",
-        "/placeholder.svg?height=600&width=800&text=Člun 3",
-      ],
-    },
-  };
+export const vehicles = [
+  {
+    slug: "cas-20-tatra",
+    name: "CAS 20 TATRA",
+    type: "Hasičský automobilový žebřík",
+
+    description:
+      "Hlavní zásahové vozidlo jednotky určené pro široké spektrum mimořádných událostí.",
+
+    image: "/images/vehicles/cas-tatra/hero.jpg",
+
+    images: [
+      "/images/vehicles/cas-tatra/1.jpg",
+      "/images/vehicles/cas-tatra/2.jpg",
+      "/images/vehicles/cas-tatra/3.jpg",
+      "/images/vehicles/cas-tatra/4.jpg",
+    ],
+
+    specifications: [
+      {
+        label: "Podvozek",
+        value: "TATRA",
+      },
+      {
+        label: "Typ",
+        value: "CAS 20",
+      },
+      {
+        label: "Primární využití",
+        value: "Požáry a technické zásahy",
+      },
+    ],
+  },
+
+  {
+    slug: "da-vw-crafter",
+    name: "DA Volkswagen Crafter",
+    type: "Dopravní automobil",
+
+    description:
+      "Dopravní automobil určený především pro přepravu osob a materiálu.",
+
+    image: "/images/vehicles/crafter/hero.jpg",
+
+    images: [
+      "/images/vehicles/crafter/1.jpg",
+      "/images/vehicles/crafter/2.jpg",
+      "/images/vehicles/crafter/3.jpg",
+      "/images/vehicles/crafter/4.jpg",
+    ],
+
+    specifications: [
+      {
+        label: "Podvozek",
+        value: "Volkswagen Crafter",
+      },
+      {
+        label: "Typ",
+        value: "DA",
+      },
+      {
+        label: "Primární využití",
+        value: "Přeprava osob a materiálu",
+      },
+    ],
+  },
+
+  {
+    slug: "zachranny-clun",
+    name: "Záchranný člun",
+    type: "Vodní záchrana",
+
+    description:
+      "Plavidlo určené pro zásahy na vodních plochách a záchranu osob při povodních.",
+
+    image: "/images/vehicles/boat/hero.jpg",
+
+    images: [
+      "/images/vehicles/boat/1.jpg",
+      "/images/vehicles/boat/2.jpg",
+      "/images/vehicles/boat/3.jpg",
+      "/images/vehicles/boat/4.jpg",
+    ],
+
+    specifications: [
+      {
+        label: "Kategorie",
+        value: "Záchranné plavidlo",
+      },
+      {
+        label: "Využití",
+        value: "Vodní záchrana",
+      },
+      {
+        label: "Nasazení",
+        value: "Povodně a záchranné práce",
+      },
+    ],
+  },
+];

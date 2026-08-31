@@ -63,6 +63,7 @@ export async function getAllPosts(options?: {
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   "use cache";
+  cacheTag("posts");
   cacheTag(`post-${slug}`);
 
   const { data: post, error } = await tryCatch(
@@ -92,4 +93,42 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       description: post.author.description,
     },
   };
+}
+
+export async function getRelatedPosts({
+  categoryId,
+  currentSlug,
+  limit = 3,
+}: {
+  categoryId: string;
+  currentSlug: string;
+  limit?: number;
+}) {
+  "use cache";
+  cacheTag("posts");
+
+  const relatedPosts = await db.query.posts.findMany({
+    where: {
+      published: true,
+      categoryId: {
+        eq: categoryId,
+      },
+      slug: {
+        ne: currentSlug,
+      },
+    },
+
+    with: {
+      category: true,
+      author: true,
+    },
+
+    limit,
+  });
+
+  return relatedPosts.map(({ createdAt, image, ...post }) => ({
+    ...post,
+    image: image ?? undefined,
+    date: createdAt,
+  }));
 }

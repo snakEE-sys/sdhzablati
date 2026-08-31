@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Category } from "../types";
+import { Category } from "../../types";
 
 export function PostCategoryFilter({
   categories,
@@ -13,15 +13,15 @@ export function PostCategoryFilter({
   onChange?: (category: Category["name"]) => void;
 }) {
   return (
-    <div>
+    <div className="space-y-2">
       {categories.map((category: Category) => (
         <Button
-          key={category.name}
+          key={category.id}
           onClick={() => onChange?.(category.name)}
           data-active={value === category.name}
           className={`px-4 py-2 mx-1 rounded-full text-sm font-medium transition-colors ${
             value === category.name
-              ? "bg-linear-to-r from-red-600 to-orange-500 text-primary-foreground"
+              ? "bg-custom-dark-red text-primary-foreground"
               : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
           }`}
         >

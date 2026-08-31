@@ -1,6 +1,6 @@
 "use client";
 
-import { signUp } from "@/utils/auth-client";
+import { signUp } from "@/features/auth/auth-client";
 import { useRouter } from "next/navigation";
 import {
   CardDescription,
@@ -13,7 +13,7 @@ import Image from "next/image";
 import AuthError from "@/app/components/errors/authError";
 
 import { useAppForm } from "@/components/form";
-import { signUpSchema } from "@/utils/auth-schema";
+import { signUpSchema } from "@/features/auth/auth-schema";
 
 const SignUp = () => {
   const router = useRouter();

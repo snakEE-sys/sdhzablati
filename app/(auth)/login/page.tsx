@@ -1,8 +1,8 @@
 "use client";
 
-import { signIn } from "@/utils/auth-client";
+import { signIn } from "@/features/auth/auth-client";
 import { useRouter } from "next/navigation";
-import { signInSchema } from "@/utils/auth-schema";
+import { signInSchema } from "@/features/auth/auth-schema";
 import Image from "next/image";
 import {
   CardContent,

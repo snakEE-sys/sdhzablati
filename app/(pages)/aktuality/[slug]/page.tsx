@@ -1,73 +1,72 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/features/posts/queries";
+
 import {
-  PostArticle,
-  PostHero,
-  PostMeta,
-} from "@/features/posts/components/PostDetails";
-import { PostSocialShare } from "@/features/posts/components/PostSocialShare";
-import { RelatedPosts } from "@/features/posts/components/RelatedPosts";
-import { PostSidebar } from "@/features/posts/components/PostSidebar";
-import { ArrowLeft } from "lucide-react";
+  getAllPosts,
+  getPostBySlug,
+  getRelatedPosts,
+} from "@/features/posts/queries";
+import { PostHero } from "@/features/posts/components/public/PostHero";
+import { PostContent } from "@/features/posts/components/public/PostContent";
+import { RelatedPosts } from "@/features/posts/components/public/RelatedPosts";
+import { PostSidebar } from "@/features/posts/components/public/PostSidebar";
+import { Suspense } from "react";
 
-export const instant = false;
-
-export default async function Page({
-  params,
-}: {
+type Props = {
   params: Promise<{ slug: string }>;
-}) {
+};
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts({ published: true });
+
+  return posts?.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
+export default async function PostPage({ params }: Props) {
+  return (
+    <Suspense fallback="Loading..">
+      <PostPageContent params={params} />
+    </Suspense>
+  );
+}
+
+async function PostPageContent({ params }: Props) {
   const { slug } = await params;
-  const [post, allPosts] = await Promise.all([
-    getPostBySlug(slug),
-    getAllPosts(),
-  ]);
-  if (!post) return notFound();
-  if (!allPosts) return null;
+
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  const relatedPosts = await getRelatedPosts({
+    categoryId: post.category.id,
+    currentSlug: post.slug,
+    limit: 3,
+  });
 
   return (
-    <div className="flex flex-col min-h-[100dvh]">
-      <main className="flex-1">
-        <div className="container mt-8 mx-auto">
-          <Link
-            href="/blog"
-            className="inline-flex items-center text-slate-600 hover:text-red-600 transition-colors"
-          >
-            <ArrowLeft className="mr-2 h-4 w-4" /> Zpět na všechny aktuality
-          </Link>
+    <main className="overflow-hidden">
+      <PostHero post={post} />
+
+      <section className="m-2 md:m-4 rounded-3xl bg-white">
+        <div className="container mx-auto px-4 py-16 md:px-8 md:py-24 lg:px-16 xl:px-32">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
+            <PostContent content={post.content} />
+
+            <aside className="lg:sticky lg:top-8 lg:self-start">
+              <PostSidebar
+                author={post.author}
+                title={post.title}
+                slug={post.slug}
+              />
+            </aside>
+          </div>
         </div>
-        <section className="py-8">
-          <div className="container mx-auto">
-            <PostMeta post={post} />
-          </div>
-        </section>
-        <section className="mb-12">
-          <div className="container mx-auto">
-            <PostHero post={post} />
-          </div>
-        </section>
-        <section className="mb-16">
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-              <div className="lg:col-span-3">
-                <PostArticle post={post} />
-                <div className="mt-12 pt-6 border-t">
-                  <PostSocialShare />
-                </div>
-              </div>
-              <div className="lg:col-span-1">
-                <PostSidebar author={post.author} category={post.category} />
-              </div>
-            </div>
-          </div>
-        </section>
-        <RelatedPosts
-          posts={allPosts}
-          currentSlug={post.slug}
-          currentCategory={post.category.id}
-        />
-      </main>
-    </div>
+      </section>
+
+      <RelatedPosts posts={relatedPosts} />
+    </main>
   );
 }

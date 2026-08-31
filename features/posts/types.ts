@@ -13,8 +13,6 @@ export type Post = {
 };
 
 export type RelatedPostsProps = {
-  currentSlug: string;
-  currentCategory: string;
   posts: Post[];
 };
 
@@ -31,5 +29,6 @@ type Author = {
 
 export type PostSidebarProps = {
   author: Author;
-  category: Category;
+  title: string;
+  slug: string;
 };

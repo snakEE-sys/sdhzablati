@@ -29,7 +29,7 @@
   --destructive-foreground: #FFFFFF;
   --border: oklch(0.92 0 0);
   --input: oklch(0.96 0 0);
-  --ring: #FF8C00;
+  --ring: hsl(0, 74%, 42%);
   --chart-1: #FF2400;
   --chart-2: #FF8C00;
   --chart-3: #B22222;

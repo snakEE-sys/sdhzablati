@@ -115,23 +115,31 @@ export function Navbar() {
           </NavigationMenu>
 
           <div className="flex items-center gap-4">
-            <Link href="/instagram" className="flex size-6">
+            <Link
+              href="https://instagram.com/sdhzablati"
+              className="flex size-6"
+            >
               <Image
-                src="instagram.svg"
+                src="/instagram.svg"
                 width={18}
                 height={18}
                 alt="instagram"
               />
             </Link>
             <Link href="/facebook" className="flex size-6 items-center">
-              <Image src="facebook.svg" width={18} height={18} alt="facebook" />
+              <Image
+                src="/facebook.svg"
+                width={18}
+                height={18}
+                alt="facebook"
+              />
             </Link>
           </div>
         </div>
         <div className="flex justify-center items-center">
           <Button
             variant="redCapsule"
-            className="h-10 xl:h-12 font-medium xl:text-base px-8"
+            className="h-10 xl:h-12 font-medium xl:text-base px-8 group"
           >
             <span>Chci se přidat</span>
             <div className="flex h-7 w-7 -mr-6 ml-2 items-center justify-center rounded-full bg-white text-black transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">

@@ -2,7 +2,7 @@ export const getCategoryColor = (category: string | null) => {
   switch (category) {
     case "Novinky":
       return "bg-green-100 text-green-800";
-    case "Školení":
+    case "Pozvánka":
       return "bg-pink-100 text-pink-800";
     case "Události":
       return "bg-purple-100 text-purple-800";

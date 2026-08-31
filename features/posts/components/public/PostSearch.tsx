@@ -13,11 +13,11 @@ export function PostSearch({
 
   useEffect(
     () => onSearchTermChange?.(searchTerm),
-    [searchTerm, onSearchTermChange]
+    [searchTerm, onSearchTermChange],
   );
   return (
     <>
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />
+      <Search className="text-slate-400 h-5 w-5 absolute mt-2 ml-3" />
       <Input
         placeholder="Hledat v aktualitách..."
         className="pl-10 rounded-full border-slate-300"

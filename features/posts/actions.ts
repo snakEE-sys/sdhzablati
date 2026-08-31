@@ -2,15 +2,15 @@
 
 import { db } from "@/db/db";
 import { tryCatch } from "@/lib/utils/try-catch";
-import { posts } from "@/db/schema";
-import { slugify } from "./hooks/slugify";
+import { posts, posts_categories } from "@/db/schema";
+import { slugify } from "./utils/slugify";
 import { updateTag } from "next/cache";
 import { PostsValues } from "./schema";
 import { and, eq, ne } from "drizzle-orm";
-import { isAuthorized } from "@/utils/isAuthorized";
+import { requirePermission } from "../auth/authorization";
 
 export async function createPost(post: PostsValues) {
-  const session = await isAuthorized();
+  const session = await requirePermission({ posts: ["create"] });
 
   const authorId = session.user.id;
 
@@ -50,7 +50,7 @@ export async function createPost(post: PostsValues) {
 }
 
 export async function editPost(postId: string, post: PostsValues) {
-  await isAuthorized();
+  await requirePermission({ posts: ["update"] });
 
   const { error } = await tryCatch(
     db.transaction(async (tx) => {
@@ -87,6 +87,52 @@ export async function editPost(postId: string, post: PostsValues) {
 
   updateTag("posts");
   updateTag(`post-${slugify(post.title)}`);
+
+  return { success: true };
+}
+
+export async function createPostCategory(name: string) {
+  await requirePermission({ settings: ["create"] });
+
+  const { error } = await tryCatch(
+    db.insert(posts_categories).values({
+      name,
+    }),
+  );
+
+  if (error) throw error;
+  updateTag("posts_categories");
+
+  return { success: true };
+}
+
+export async function editPostCategory(name: string, id: string) {
+  await requirePermission({ settings: ["update"] });
+
+  const { error } = await tryCatch(
+    db
+      .update(posts_categories)
+      .set({
+        name,
+      })
+      .where(eq(posts_categories.id, id)),
+  );
+
+  if (error) throw error;
+  updateTag("posts_categories");
+
+  return { success: true };
+}
+
+export async function deletePostCategory(id: string) {
+  await requirePermission({ settings: ["delete"] });
+
+  const { error } = await tryCatch(
+    db.delete(posts_categories).where(eq(posts_categories.id, id)),
+  );
+
+  if (error) throw error;
+  updateTag("posts_categories");
 
   return { success: true };
 }

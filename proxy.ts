@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
-import { getServerSession } from "./utils/auth-server";
+import { getServerSession } from "./features/auth/auth-server";
 
 export async function proxy(request: NextRequest) {
   /*const cookies = getSessionCookie(request);

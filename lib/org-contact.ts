@@ -5,7 +5,7 @@ export const orgContact = {
   phoneDisplay: "+420 731 130 689",
   email: "info@sdhzablati.cz",
   addressLines: [
-    "Sbor dobrovolných hasičů",
+    "SH ČMS - Sbor dobrovolných hasičů Bohumín - Záblatí",
     "Sokolská 208",
     "735 52 Bohumín – Záblatí",
   ],

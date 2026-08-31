@@ -1,4 +1,4 @@
-import { getServerSession } from "@/utils/auth-server";
+import { getServerSession } from "@/features/auth/auth-server";
 
 export async function DashboardHeader() {
   const session = await getServerSession();

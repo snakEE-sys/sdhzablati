@@ -3,13 +3,18 @@
 import { db } from "@/db/db";
 import { InterventionValues } from "./schema";
 import { tryCatch } from "@/lib/utils/try-catch";
-import { interventionDeployments, interventions } from "@/db/schema";
+import {
+  categories,
+  interventionDeployments,
+  interventions,
+  subcategories,
+} from "@/db/schema";
 import { updateTag } from "next/cache";
 import { eq } from "drizzle-orm";
-import { isAuthorized } from "@/utils/isAuthorized";
+import { requirePermission } from "../auth/authorization";
 
 export async function createIntervention(intervention: InterventionValues) {
-  await isAuthorized();
+  await requirePermission({ intervention: ["create"] });
 
   const { error } = await tryCatch(
     db.transaction(async (tx) => {
@@ -45,7 +50,7 @@ export async function editIntervention(
   interventionId: string,
   intervention: InterventionValues,
 ) {
-  await isAuthorized();
+  await requirePermission({ intervention: ["edit"] });
 
   const { error } = await tryCatch(
     db.transaction(async (tx) => {
@@ -87,7 +92,7 @@ export async function editIntervention(
 }
 
 export async function deleteIntervention(id: string) {
-  await isAuthorized();
+  await requirePermission({ intervention: ["delete"] });
 
   const { error } = await tryCatch(
     db.delete(interventions).where(eq(interventions.id, id)),
@@ -95,5 +100,106 @@ export async function deleteIntervention(id: string) {
   if (error) return error;
 
   updateTag("interventions");
+  return { success: true };
+}
+
+export async function createInterventionCategory(name: string) {
+  await requirePermission({ settings: ["create"] });
+
+  const { error } = await tryCatch(
+    db.insert(categories).values({
+      name,
+    }),
+  );
+
+  if (error) throw error;
+  updateTag("intervention_categories");
+
+  return { success: true };
+}
+
+export async function editInterventionCategory(id: string, name: string) {
+  await requirePermission({ settings: ["update"] });
+
+  const { error } = await tryCatch(
+    db
+      .update(categories)
+      .set({
+        name,
+      })
+      .where(eq(categories.id, id)),
+  );
+
+  if (error) throw error;
+  updateTag("intervention_categories");
+
+  return { success: true };
+}
+
+export async function deleteInterventionCategory(id: string) {
+  await requirePermission({ settings: ["delete"] });
+
+  const { error } = await tryCatch(
+    db.delete(categories).where(eq(categories.id, id)),
+  );
+
+  if (error) throw error;
+  updateTag("intervention_categories");
+
+  return { success: true };
+}
+
+export async function createInterventionSubcategory(
+  name: string,
+  categoryId: string,
+) {
+  await requirePermission({ settings: ["create"] });
+
+  const { error } = await tryCatch(
+    db.insert(subcategories).values({
+      name,
+      categoryId,
+    }),
+  );
+
+  if (error) throw error;
+  updateTag("intervention_subcategories");
+
+  return { success: true };
+}
+
+export async function editInterventionSubcategory(
+  categoryId: string,
+  name: string,
+  id: string,
+) {
+  await requirePermission({ settings: ["update"] });
+
+  const { error } = await tryCatch(
+    db
+      .update(subcategories)
+      .set({
+        name,
+        categoryId,
+      })
+      .where(eq(subcategories.id, id)),
+  );
+
+  if (error) throw error;
+  updateTag("intervention_categories");
+
+  return { success: true };
+}
+
+export async function deleteInterventionSubcategory(id: string) {
+  await requirePermission({ settings: ["delete"] });
+
+  const { error } = await tryCatch(
+    db.delete(subcategories).where(eq(subcategories.id, id)),
+  );
+
+  if (error) throw error;
+  updateTag("intervention_subcategories");
+
   return { success: true };
 }

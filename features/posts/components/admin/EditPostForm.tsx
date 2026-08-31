@@ -100,7 +100,7 @@ export function EditPostForm({
         )}
       />
       <form.AppForm>
-        <form.SubmitButton>Vytvořit</form.SubmitButton>
+        <form.SubmitButton>Upravit</form.SubmitButton>
       </form.AppForm>
     </form>
   );

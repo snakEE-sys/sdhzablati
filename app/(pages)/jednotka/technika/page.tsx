@@ -1,3 +1,3 @@
-export default function JednotkaPage() {
+export default function TechniquePage() {
   return <div></div>;
 }

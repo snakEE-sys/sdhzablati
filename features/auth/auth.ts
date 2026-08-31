@@ -3,6 +3,8 @@ import { nextCookies } from "better-auth/next-js";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db/db";
 import { user, account, session, verification } from "@/db/schema";
+import { admin as adminPlugin } from "better-auth/plugins";
+import { ac, admin, dashboardUser } from "./permissions";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -16,12 +18,6 @@ export const auth = betterAuth({
   }),
   user: {
     additionalFields: {
-      role: {
-        type: ["Editor", "Administrátor"],
-        required: true,
-        defaultValue: "Editor",
-        input: false,
-      },
       description: {
         type: "string",
         required: false,
@@ -34,5 +30,14 @@ export const auth = betterAuth({
     autoSignIn: false,
   },
 
-  plugins: [nextCookies()],
+  plugins: [
+    adminPlugin({
+      ac,
+      roles: {
+        admin,
+        dashboardUser,
+      },
+    }),
+    nextCookies(),
+  ],
 });
