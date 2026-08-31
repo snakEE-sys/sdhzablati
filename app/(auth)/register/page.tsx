@@ -31,8 +31,8 @@ const SignUp = () => {
     validators: {
       onBlur: signUpSchema,
     },
-    onSubmit: async ({ value }) =>
-      await signUp.email({
+    onSubmit: async ({ value }) => {
+      /* await signUp.email({
         email: value.email,
         password: value.password,
         name: value.firstName + " " + value.lastName,
@@ -45,7 +45,8 @@ const SignUp = () => {
             router.push("/dashboard");
           },
         },
-      }),
+      })*/
+    },
   });
 
   return (
