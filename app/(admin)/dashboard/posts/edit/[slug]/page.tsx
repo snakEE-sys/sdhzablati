@@ -2,9 +2,8 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Pencil } from "lucide-react";
-
-import { EditPostForm } from "@/features/posts/components/EditPostForm";
 import { getCategories, getPostBySlug } from "@/features/posts/queries";
+import { EditPostForm } from "@/features/posts/components/admin/EditPostForm";
 
 type Props = {
   params: Promise<{ slug: string }>;

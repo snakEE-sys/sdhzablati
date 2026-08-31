@@ -1,4 +1,4 @@
-import { AddPostForm } from "@/features/posts/components/AddPostForm";
+import { AddPostForm } from "@/features/posts/components/admin/AddPostForm";
 import { getCategories } from "@/features/posts/queries";
 import { ArrowLeft, FilePlus2 } from "lucide-react";
 import Link from "next/link";
