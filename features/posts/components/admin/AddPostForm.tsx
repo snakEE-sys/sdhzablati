@@ -1,10 +1,10 @@
 "use client";
 
 import { useAppForm } from "@/components/form";
-import { Category } from "../types";
-import { postsSchema, PostsValues } from "../schema";
-import { createPost } from "../actions";
 import { toast } from "sonner";
+import { postsSchema, PostsValues } from "../../schema";
+import { Category } from "../../types";
+import { createPost } from "../../actions";
 
 export function AddPostForm({ categories }: { categories: Category[] }) {
   const defaultValues: PostsValues = {

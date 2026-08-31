@@ -1,10 +1,10 @@
 "use client";
 
 import { useAppForm } from "@/components/form";
-import { Category, Post } from "../types";
-import { postsSchema, PostsValues } from "../schema";
-import { editPost } from "../actions";
 import { toast } from "sonner";
+import { Category, Post } from "../../types";
+import { postsSchema, PostsValues } from "../../schema";
+import { editPost } from "../../actions";
 
 export function EditPostForm({
   post,
