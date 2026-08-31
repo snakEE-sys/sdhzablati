@@ -3,7 +3,9 @@ import Image from "next/image";
 import { Post } from "../../types";
 
 function postImageSrc(image?: string) {
-  return image && image.length > 0 ? image : "/images/sponsors/nsa.png";
+  return image && image.length > 0
+    ? image
+    : "https://sdhzablati.cz/images/sponsors/nsa.png";
 }
 
 export function PostHero({ post }: { post: Post }) {
