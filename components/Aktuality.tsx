@@ -62,7 +62,7 @@ export default async function Aktuality() {
                 className="relative lg:col-span-2 rounded-2xl overflow-hidden min-h-[380px] md:min-h-[460px] group cursor-pointer block"
               >
                 <Image
-                  src={postImageSrc(featured.image)}
+                  src="/images/sponsors/nsa.png"
                   alt={featured.title}
                   fill
                   className="object-cover brightness-75 transition duration-500 group-hover:scale-[1.02] group-hover:brightness-[0.65]"
