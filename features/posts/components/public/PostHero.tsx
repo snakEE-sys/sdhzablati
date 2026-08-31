@@ -47,7 +47,7 @@ export function PostHero({ post }: { post: Post }) {
 
           <div className="relative order-1 min-h-[350px] overflow-hidden rounded-2xl lg:order-2 lg:min-h-[500px]">
             <Image
-              src={postImageSrc(post.image)}
+              src="/images/sponsors/nsa.png"
               alt={post.title}
               fill
               priority
